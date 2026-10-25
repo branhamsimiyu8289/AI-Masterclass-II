@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Country Info</title>
+  <style>
+    body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+    h1 { color: #1F4E79; }
+    #result { background: #f7f9fc; border: 1px solid #d0dff0; border-radius: 8px; padding: 20px; margin-top: 20px; }
+    button { background: #2E75B6; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px; }
+    button:hover { background: #1F4E79; }
+  </style>
+</head>
+<body>
+
+<h1>Country Info</h1>
+<input type="text" id="countryInput" placeholder="Enter a country name" style="padding:8px; font-size:16px; width:250px;">
+<button onclick="loadCountry()">Search</button>
+<div id="result">Enter a country name above and click Search.</div>
+
+<script>
+async function loadCountry() {
+  const country = document.getElementById("countryInput").value.trim();
+
+  if (!country) {
+    document.getElementById("result").innerHTML = "Please enter a country name.";
+    return;
+  }
+
+  document.getElementById("result").innerHTML = "Loading...";
+
+  try {
+    const response = await fetch(`/api/country?name=${encodeURIComponent(country)}`);
+    const payload = await response.json();
+    const apiErrors = Array.isArray(payload?.errors)
+      ? payload.errors.map(error => error?.message).filter(Boolean).join("; ")
+      : "";
+
+    if (!response.ok) {
+      throw new Error(apiErrors || `Country lookup failed (${response.status})`);
+    }
+
+    const countries = payload?.data?.objects;
+    if (!Array.isArray(countries) || countries.length === 0) {
+      throw new Error(apiErrors || "No country matched that name.");
+    }
+
+    const info = countries[0];
+    const name = info.names?.common || country;
+    const capital = info.capitals?.[0]?.name || "N/A";
+    const population = Number.isFinite(info.population)
+      ? info.population.toLocaleString()
+      : "N/A";
+    const region = info.region || "N/A";
+    const flag = info.flag?.emoji || "";
+
+    const result = document.getElementById("result");
+    result.replaceChildren();
+
+    const heading = document.createElement("h2");
+    heading.textContent = `${flag} ${name}`;
+    result.appendChild(heading);
+
+    for (const [label, value] of [
+      ["Capital:", capital],
+      ["Region:", region],
+      ["Population:", population]
+    ]) {
+      const paragraph = document.createElement("p");
+      const strong = document.createElement("strong");
+      strong.textContent = label;
+      paragraph.append(strong, ` ${value}`);
+      result.appendChild(paragraph);
+    }
+  } catch (error) {
+    document.getElementById("result").textContent = `Error: ${error.message}`;
+  }
+}
+</script>
+
+</body>
+</html>
