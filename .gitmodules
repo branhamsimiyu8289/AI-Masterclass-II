@@ -1,6 +1,0 @@
-[submodule "travel-app"]
-	path = travel-app
-	url = https://github.com/branhamsimiyu8289/travel-app.git
-[submodule "browser-api-call/AI-Masterclass-II"]
-	path = browser-api-call/AI-Masterclass-II
-	url = https://github.com/branhamsimiyu8289/AI-Masterclass-II.git
