@@ -1,0 +1,63 @@
+CLIENT BRIEF
+============
+
+## Project Summary
+
+The client is looking for a freelancer to build and implement AI agents for
+their business. The project includes designing agent workflows, integrating
+tools, and ensuring the system runs reliably. They are looking for someone who
+can work independently, communicate clearly, and deliver practical solutions
+that improve existing processes.
+
+## Brief Analysis
+
+**The problem**
+
+The business may have manual bottlenecks or inefficient processes, but it
+doesn’t have the in-house technical resources to design, build, and maintain
+automated AI-agent workflows.
+
+**The deliverable**
+
+A set of functional, integrated AI agents with defined workflows and connected
+tools. These agents should address a specific operational problem and run
+reliably.
+
+**The deadline**
+
+No timeline or target launch date is provided.
+
+## What’s Unclear
+
+- Which business process or department should the agents support (for example,
+  customer support, lead generation, or data entry)?
+- Which tools, CRMs, or other software must the agents integrate with?
+- What does “running smoothly” mean in measurable terms, such as response time,
+  error handling, or accuracy?
+- What is the project budget and expected duration?
+
+## Three Questions to Ask Before Writing a Proposal
+
+1. Which business process or workflow would you like to automate first?
+2. Which existing tools, software, or databases—such as a CRM, email platform,
+   or spreadsheets—will the agents need to use?
+3. What is your target timeline for launching the initial workflow?
+
+## What They Said vs. What They Need
+
+**What they said:** “We need a freelancer to build and implement AI agents for
+our business, design workflows, and integrate tools.”
+
+**What they may need:** An experienced developer to identify operational
+bottlenecks, define a high-impact minimum viable product (MVP), and implement a
+reliable automation system that saves the team measurable time each week.
+
+## Potential Red Flags
+
+- **The brief lacks specifics.** Phrases such as “build and implement AI
+  agents” and “integrate tools” don’t identify a concrete problem. The client
+  may be interested in AI without having decided where it will provide the most
+  value.
+- **There is no deadline or budget.** Without these constraints, it is
+  difficult to assess whether the project fits your availability, rates, and
+  delivery approach.
