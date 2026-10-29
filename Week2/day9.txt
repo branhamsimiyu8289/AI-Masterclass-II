@@ -1,0 +1,48 @@
+# Project Agreement: Automated School Attendance SMS Script
+
+## Project overview
+
+This agreement outlines the scope, timeline, and payment terms for developing
+a custom Python script to automate student attendance SMS notifications for
+the school.
+
+## 1. Scope of work
+
+### Included
+
+- Develop a Python script that reads student attendance data from an Excel
+  file.
+- Identify students who have been absent for three or more days in a given
+  week.
+- Integrate with an SMS gateway API to send automated text messages to
+  parents.
+
+### Not included
+
+- Ongoing maintenance, hosting, or server management after final delivery and
+  handover.
+- SMS gateway subscription credits or airtime bundles. The school will
+  maintain its own SMS account.
+- Data entry or manual cleaning of the school's historical Excel attendance
+  records.
+
+## 2. Payment terms
+
+The total project budget is **KES 22,000**.
+
+- **Deposit (50%): KES 11,000**, due before work begins.
+- **Final payment (50%): KES 11,000**, due within two business days of
+  successful delivery and confirmation of project testing.
+
+Work will begin once the deposit has cleared.
+
+## 3. Timeline
+
+The project will start once the 50% deposit has cleared. Delivery is estimated
+within **seven working days** of the official start date.
+
+## 4. Out-of-scope requests
+
+Requests for additional features, modifications, or support beyond the agreed
+scope after project delivery will be billed separately at an hourly or
+milestone rate agreed upon by both parties.

@@ -1,0 +1,75 @@
+{
+  "location": {
+    "name": "Nairobi",
+    "state": "Nakuru",
+    "country_code": "KE",
+    "latitude": -0.1554129,
+    "longitude": 36.0955731,
+    "gps_coordinates": "0.1554° S, 36.0956° E (-0.1554, 36.0956)"
+  },
+  "weather": {
+    "temperature_c": 27.2,
+    "feels_like_c": 26.59,
+    "temp_min_c": 27.2,
+    "temp_max_c": 27.2,
+    "humidity_percent": 31,
+    "pressure_hpa": 1007,
+    "condition": "Broken Clouds",
+    "wind_speed_mps": 6.76
+  },
+  "country": {},
+  "raw_data": {
+    "geocoding_place": {
+      "name": "Nairobi",
+      "lat": -0.1554129,
+      "lon": 36.0955731,
+      "country": "KE",
+      "state": "Nakuru"
+    },
+    "weather": {
+      "coord": {
+        "lon": 36.0956,
+        "lat": -0.1554
+      },
+      "weather": [
+        {
+          "id": 803,
+          "main": "Clouds",
+          "description": "broken clouds",
+          "icon": "04d"
+        }
+      ],
+      "base": "stations",
+      "main": {
+        "temp": 27.2,
+        "feels_like": 26.59,
+        "temp_min": 27.2,
+        "temp_max": 27.2,
+        "pressure": 1007,
+        "humidity": 31,
+        "sea_level": 1007,
+        "grnd_level": 819
+      },
+      "visibility": 10000,
+      "wind": {
+        "speed": 6.76,
+        "deg": 38,
+        "gust": 6.01
+      },
+      "clouds": {
+        "all": 79
+      },
+      "dt": 1792150900,
+      "sys": {
+        "country": "KE",
+        "sunrise": 1792120657,
+        "sunset": 1792164271
+      },
+      "timezone": 10800,
+      "id": 184622,
+      "name": "Nakuru",
+      "cod": 200
+    },
+    "country": null
+  }
+}

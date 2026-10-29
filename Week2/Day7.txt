@@ -1,0 +1,52 @@
+AI AGENT WORKFLOW PROPOSAL
+=========================
+
+## Opening
+
+Your team can spend less time on repetitive work and more time serving
+customers by using AI agents to streamline a key business process. I can help
+you select a practical starting point, then design and implement a workflow
+that works with your existing tools and keeps your team in control.
+
+## Understanding
+
+To shape a solution around your needs, we’ll first agree on the process or
+department to automate and the outcomes that matter most. I’ll learn how the
+work is handled today, where delays or manual bottlenecks occur, and which
+tasks should remain with staff. We’ll identify required tools, access,
+exception handling, and launch timing. This discovery ensures the scope is
+clear before development begins.
+
+## Approach
+
+I’ll map the agreed workflow and identify suitable tasks for AI assistance.
+Next, I’ll configure the agents, connect them to the selected tools, and test
+the workflow using representative scenarios. Together, we’ll test routine
+cases and confirm when it should flag decisions for human review. I’ll make
+agreed adjustments before
+handover, with a focus on reliability, usability, and a clear path for your
+team to manage the process.
+
+## Deliverables
+
+You’ll receive a working AI-agent workflow integrated with the agreed tools,
+documentation covering its operation and key review points, and a 30-minute
+team handover.
+
+## Investment and timeline
+
+The fixed project price is KES 45,000, with 50% payable upfront and 50% upon
+delivery. Estimated delivery is 10 working days after I receive the required
+system access and we confirm the workflow requirements.
+
+## Pricing assumption
+
+The project price assumes your existing systems, data, and licenses are
+available for the workflow. Any new third-party subscriptions, API usage, or
+hosting fees are not included and will be discussed and approved separately
+before they are incurred.
+
+## Next step
+
+Choose the first business process you’d like to improve, then schedule a short
+discovery conversation so we can confirm the requirements and get started.
