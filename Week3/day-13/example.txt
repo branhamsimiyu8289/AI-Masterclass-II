@@ -1,0 +1,65 @@
+Otieno Wholesale Assistant. Type 'exit' to quit.
+
+You: HOW ARE YOU
+
+Assistant: Hello! I am doing well, thank you. Welcome to lp you with our stock, pricing, or delivery today?
+
+You: Where do you deliver?
+
+Assistant: We deliver around Kisumu and its surrounding afic location and the size of your order. Where would you
+
+You: What did you say?
+
+Assistant: I said we deliver around Kisumu and the surrou your location and order size. Where should we deliver yo
+
+You: [Customer pasted a local file path.]
+
+Assistant: It looks like you pasted a file path! Are you
+
+If you are shopping at Otieno Wholesale, let me know if ydeliveries.
+
+You: how was your day?
+
+Assistant: My day is going great, thank you for asking! Rat Otieno Wholesale. How can I assist you today?
+
+You: Tell me what you do.
+
+Assistant: I am your assistant for Otieno Wholesale in Kive you pricing details (in KES), and answer questions aboind today?
+
+You: How much is 1 bag of cement
+
+Assistant: A bag of cement is 750 KES at Otieno Wholesalehould we deliver them?
+
+You: I wanted 2, delivered at Kakamega.
+
+Assistant: 2 bags of cement will be 1,500 KES (750 KES ea
+
+Delivery to Kakamega will cost an extra 500 KES for trans order?
+
+You: So what is my total before I proceed?
+
+Assistant: Your total is 2,000 KES (1,500 KES for 2 bags mega). Shall I confirm your order?
+
+You: What about making the payements?
+
+Assistant: Payments can be made via M-Pesa or cash upon dd you prefer, and I'll complete your order!
+
+You: Cash.
+
+Assistant: Got it! Your order for 2 bags of cement to Kak upon delivery) is noted.
+
+Please share a contact number and delivery location.
+
+You: [Customer shares a contact number and delivery location.]
+
+Assistant: Asante! Tumepokea maelezo yako ya mawasiliano na oda ya mifuko 2 ya sementi. Jumla ni 2,000 KES (utalipa pesa tas karibuni!
+
+You: Mtanipigia?
+
+Assistant: Ndiyo, dereva wetu atakupigia kwa nambari yakoi mkaelewane vizuri. Asante kwa kununua na Otieno Wholesa
+
+You: Karibu sana.
+
+Assistant: Asante sana! Karibu tena wakati mwingine Otien chochote, niambie tu. Kuwa na siku njema!
+
+You: exit

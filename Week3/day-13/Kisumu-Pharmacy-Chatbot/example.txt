@@ -1,0 +1,21 @@
+Kisumu Pharmacy Assistant. Type 'exit' to quit.
+
+Staff: how are you!
+
+Assistant: Hello! I am doing well, thank you. How can I help you support a customer at Kisumu Pharmacy today?
+
+Staff: I wanted to come for a consultation.
+
+Assistant: For clinical consultations or medication-use counselling, our customers are welcome to speak directly with our pharmacist.
+
+If they have questions about over-the-counter medicines or need a clinical assessment, please let them know the pharmacist is available.
+
+Is there a specific health concern or medication they are inquiring about today? (Remember to refer clinical questions or prescription medicine recommendations to the pharmacist.)
+
+Staff: I have a question that needs clinical advice.
+
+Assistant: Since that involves a clinical question, I will need to refer it to the pharmacist. Please invite the customer to speak directly with the pharmacist so they can provide proper guidance and medication-use counselling.
+
+Is there anything else regarding our pharmacy services, such as stock availability or opening hours (Monday to Saturday: 8:00 AM to 8:00 PM, Sunday: 10:00 AM to 4:00 PM), that I can help you with?
+
+Staff:

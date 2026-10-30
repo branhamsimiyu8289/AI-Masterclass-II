@@ -1,3 +1,4 @@
 .env
 .env.*
 !.env.example
+Week3/day-13/chat_log.json
