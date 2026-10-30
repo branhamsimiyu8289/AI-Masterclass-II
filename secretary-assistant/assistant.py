@@ -73,6 +73,12 @@ def main() -> int:
         )
         return 1
 
+    print("=======AI SECRETARY ASSISTANT=======")
+    print(
+        "Welcome to the Matatu SACCO Secretary Assistant. Ask a question about "
+        "your account balance, the next meeting, or membership fees."
+    )
+
     questions = DEMO_QUESTIONS if args.demo else (input("Member question: ").strip(),)
     if not args.demo and not questions[0]:
         print("Please enter a question.", file=sys.stderr)
