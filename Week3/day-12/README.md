@@ -1,72 +1,88 @@
-# Day 12: Property Inquiry Extraction
+# Kamau Stores Assistant
 
-`day-12-exercise.py` is a Gemini-powered property inquiry extractor for a
-Nairobi property agent. It solves the problem of manually reading WhatsApp
-messages and copying details into a spreadsheet by extracting each inquiry
-into consistent fields, while marking missing details instead of guessing.
+This project is a customer service chatbot for Kamau Stores, a wholesale distributor in Nairobi. It uses the Google Gemini API to answer questions about:
 
-## Extracted fields
+- orders
+- pricing
+- delivery
 
-- `property_type`: The kind of property, such as a house, apartment, or
-  bedsitter. This helps the agent match the inquiry to the right listings.
-- `bedrooms`: The requested bedroom count, useful for narrowing the search.
-- `location`: The requested neighborhood or area, which identifies where to
-  find suitable properties.
-- `budget_kes`: The customer's budget in Kenyan shillings, used to filter
-  affordable options. Shorthand such as `80k` is converted to `80000`.
-- `rental_or_sale`: Whether the customer wants to rent or buy, so rental and
-  sale listings are not mixed.
+The assistant is designed to stay within a limited scope and respond politely and professionally.
 
-## Setup
+## Features
 
-The script uses the Gemini API key from the `GEMINI_API_KEY` environment
-variable or the `Week3/.env` file. Keep the key private.
+- Answers questions about orders, pricing, and delivery only
+- Uses Gemini for natural language processing
+- Accepts only KES pricing language
+- Supports delivery in Nairobi, Mombasa, Kisumu, and Nakuru only
+- Redirects out-of-scope questions to the office phone number: 0712 345 678
+- Ends every response with: "Asante kwa kuwasiliana."
 
-Install the required packages in your Python environment if they are not
-already installed:
+## Requirements
 
-```powershell
-python -m pip install google-genai python-dotenv httpx
+- Python 3.9 or later
+- A valid Gemini API key
+- Internet access for the Google GenAI API
+
+## Installation
+
+Install the required Python packages:
+
+```bash
+pip install httpx python-dotenv google-genai
 ```
 
-## Run
+## Environment Setup
 
-From the `Week3` folder, enter a single inquiry:
+Create a `.env` file in the `Week3` directory:
 
-```powershell
-python .\day-12\day-12-exercise.py
+```env
+GEMINI_API_KEY=your_api_key_here
 ```
 
-Run the three example inquiries, including one with missing bedroom and budget
-information:
-
-```powershell
-python .\day-12\day-12-exercise.py --demo
-```
-
-## Sample output
-
-The exact output can vary with the inquiry, but a demo run looks like this:
+The script loads the environment file from:
 
 ```text
-Inquiry 1: I am looking for a 3-bedroom house in Kileleshwa, budget around 80k per month
-property_type: house
-bedrooms: 3
-location: Kileleshwa
-budget_kes: 80000
-rental_or_sale: rental
-
-Inquiry 2: Do you have any bedsitters near Westlands under 20k?
-property_type: bedsitter
-bedrooms: Not provided
-location: Westlands
-budget_kes: 20000
-rental_or_sale: rental
-
-Inquiry 3: I am interested in buying an apartment in Kilimani.
-property_type: apartment
-bedrooms: Not provided
-location: Kilimani
-budget_kes: Not provided
-rental_or_sale: sale
+Week3/.env
 ```
+
+## Run the Program
+
+From the project root, run:
+
+```bash
+python "Week3/day-12/Kamau-Stores.py"
+```
+
+## Example Conversation
+
+```text
+Welcome to Kamau Stores. How can we help? Do you deliver to Nakuru?
+```
+
+Example output:
+
+```text
+Yes, we deliver to Nakuru. Asante kwa kuwasiliana.
+```
+
+```text
+Welcome to Kamau Stores. How can we help? Do you deliver to Eldoret?
+```
+
+Example output:
+
+```text
+Please call our office on 0712 345 678 for that.
+Asante kwa kuwasiliana.
+```
+
+## Notes
+
+- The bot only answers questions related to orders, pricing, and delivery.
+- All prices are treated as Kenyan Shillings (KES).
+- Delivery is limited to Nairobi, Mombasa, Kisumu, and Nakuru.
+- Any out-of-scope question triggers the office contact response.
+
+## File
+
+- `Week3/day-12/Kamau-Stores.py`
