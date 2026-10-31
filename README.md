@@ -74,3 +74,7 @@ project.
 Keep API keys, passwords, customer conversations, and other private data out
 of source control. Do not commit `.env` files or generated data unless a
 project specifically requires a safe sample.
+
+## Auther
+
+Branham Simiyu 
