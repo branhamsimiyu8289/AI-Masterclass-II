@@ -37,6 +37,7 @@ admin dashboard for setting prices and reviewing or deleting daily records.
 | [day-11/](./Week3/day-11/) | Gemini-powered command-line question-and-answer script. |
 | [day-12/](./Week3/day-12/) | A Kamau Stores customer-service assistant and a property inquiry extractor that returns structured JSON. |
 | [day-13/](./Week3/day-13/) | Otieno Wholesale conversational assistant with bounded context and a local conversation log; also includes the [Kisumu Pharmacy chatbot](./Week3/day-13/Kisumu-Pharmacy-Chatbot/) for staff support and contextual follow-up questions. |
+| [day-14/](./Week3/day-14/) | Gemini tool-calling agents: a Kamau Stores inventory and price assistant, and a [Kericho tea harvesting agent](./Week3/day-14/Kericho-AI-agent-tool/) that checks current weather and the six-hour rain forecast before recommending whether to harvest. |
 
 ## Repository structure
 
@@ -56,7 +57,10 @@ AI-Masterclass-II/
 └── Week3/
     ├── day-11/                     # Gemini Q&A
     ├── day-12/                     # Store assistant and property extraction
-    └── day-13/                     # Wholesale and pharmacy chatbots
+    ├── day-13/                     # Wholesale and pharmacy chatbots
+    └── day-14/
+        ├── ai-agents.py            # Kamau Stores inventory and price agent
+        └── Kericho-AI-agent-tool/  # Weather-based tea harvesting agent and tests
 ```
 
 ## Getting started
