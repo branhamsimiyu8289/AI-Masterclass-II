@@ -1,5 +1,7 @@
 # AI Masterclass II: Automation and Automization
 
+This an online course,phase II, offered by AMERIX in his classes. 
+
 This repository brings together projects, coding exercises, and planning
 materials from **AI Masterclass II: Automation and Automization**. The work
 explores how Python, APIs, web applications, and AI assistants can automate
