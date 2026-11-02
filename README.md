@@ -39,11 +39,21 @@ admin dashboard for setting prices and reviewing or deleting daily records.
 | [day-13/](./Week3/day-13/) | Otieno Wholesale conversational assistant with bounded context and a local conversation log; also includes the [Kisumu Pharmacy chatbot](./Week3/day-13/Kisumu-Pharmacy-Chatbot/) for staff support and contextual follow-up questions. |
 | [day-14/](./Week3/day-14/) | Gemini tool-calling agents: a Kamau Stores inventory and price assistant, and a [Kericho tea harvesting agent](./Week3/day-14/Kericho-AI-agent-tool/) that checks current weather and the six-hour rain forecast before recommending whether to harvest. |
 
+### Gemini AI email drafter
+
+The [email-drafter/](./email-drafter/) command-line app uses Gemini to draft
+concise, professional Kenyan business emails from a topic. It prompts for a
+topic interactively or accepts one as a command-line argument. Its
+[README](./email-drafter/README.md) explains installation, API-key setup, both
+ways to run it, and Gemini API costs. The generated draft uses clear paragraph
+spacing; review it and replace any placeholders before sending.
+
 ## Repository structure
 
 ```text
 AI-Masterclass-II/
 ├── browser-api-call/               # Browser country lookup with local API proxy
+├── email-drafter/                  # Gemini-powered business email drafting CLI
 ├── news-api/                       # NewsAPI backend and browser news reader
 ├── rest-country-api/               # Country information CLI
 ├── travel-app/                     # Weather, GPS, and country-profile report
