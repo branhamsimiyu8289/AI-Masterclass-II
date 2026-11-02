@@ -1,5 +1,7 @@
 # AI Masterclass II: Automation and Automization
 
+This an online course,phase II, offered by AMERIX in his classes. 
+
 This repository brings together projects, coding exercises, and planning
 materials from **AI Masterclass II: Automation and Automization**. The work
 explores how Python, APIs, web applications, and AI assistants can automate
@@ -84,3 +86,7 @@ project.
 Keep API keys, passwords, customer conversations, and other private data out
 of source control. Do not commit `.env` files or generated data unless a
 project specifically requires a safe sample.
+
+## Auther
+
+Branham Simiyu 

@@ -1,4 +1,6 @@
-Hello Melkizedek Anindo,
+## Project delivery message.
+
+Hello John Doe,
 
 The SMP Command Centre Dashboard is fully built, tested, and ready for deployment. Below is a summary of what has been delivered:
 
