@@ -60,3 +60,7 @@ name returns a JSON error with HTTP status `400`.
 - Input and unknown-customer error responses
 
 ## I would charge a hardware shop owner KES 5,000 for this tool.
+
+## Author
+
+Branham Simiyu
