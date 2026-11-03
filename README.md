@@ -1,92 +1,92 @@
 # AI Masterclass II: Automation and Automization
 
-This an online course,phase II, offered by AMERIX in his classes. 
+This repository contains projects, coding exercises, and planning materials
+from **AI Masterclass II**, an AMERIX course. The projects explore how Python,
+APIs, web applications, and AI assistants can support information lookup,
+customer service, data entry, and other business workflows.
 
-This repository brings together projects, coding exercises, and planning
-materials from **AI Masterclass II: Automation and Automization**. The work
-explores how Python, APIs, web applications, and AI assistants can automate
-information lookup, customer support, data entry, and everyday business
-workflows. Projects are organized by topic and course week; each application is
-independent and has its own setup requirements.
+The repository is organized by course week and by standalone project. Each app
+is an independent learning project with its own dependencies and run
+instructions; there is no single command or dependency file for the entire
+repository.
 
-## Project catalogue
+## Projects
 
-### API and information lookup
+### Standalone applications
 
-| Project | What it does |
+| Project | Description |
 |---|---|
-| [browser-api-call/](./browser-api-call/) | Browser-based country lookup. A local Python server keeps the REST Countries API credential out of the browser and serves the lookup page. |
-| [rest-country-api/](./rest-country-api/) | Python CLI that looks up a country's capital, population, and currency through the REST Countries API. |
-| [weather-app/](./weather-app/) | CLI that validates settlement names and displays current weather and local sunrise/sunset times using OpenStreetMap Nominatim and OpenWeather. |
-| [travel-app/](./travel-app/) | Travel weather and location tool that accepts place names or GPS coordinates, enriches weather data with a country profile, and exports a JSON report. |
-| [news-api/](./news-api/) | FastAPI-backed news reader with a browser interface for politics, weather, sports, and agriculture headlines from NewsAPI. |
+| [browser-api-call/](./browser-api-call/) | Browser-based country lookup backed by a local Python server, which keeps the REST Countries API credential out of the browser. |
+| [email-drafter/](./email-drafter/) | Gemini-powered command-line tool that drafts concise Kenyan business emails from a topic. See its README for setup, API-key configuration, and usage. |
+| [news-api/](./news-api/) | FastAPI service and browser interface for browsing politics, weather, sports, and agriculture headlines from NewsAPI. |
+| [rest-country-api/](./rest-country-api/) | Command-line country lookup for capitals, population, and currency using the REST Countries API. |
+| [travel-app/](./travel-app/) | Travel weather and location tool that accepts place names or GPS coordinates, adds a country profile, and exports a JSON report. |
+| [weather-app/](./weather-app/) | Command-line settlement and weather lookup with local sunrise and sunset times, using OpenStreetMap Nominatim and OpenWeather. |
 
-### Week 2: workflow exercises and dairy price checker
+### Week 2: workflow exercises
 
-[`Week2/`](./Week2/) contains course notes and business workflow exercises,
-including an AI-agent client brief and proposal, a dashboard handoff, and an
-attendance-SMS project agreement.
+[`Week2/`](./Week2/) contains business workflow planning materials: an AI-agent
+client brief and proposal, a dashboard handoff, and an attendance-SMS project
+agreement.
 
-The [dairy-price-checker/](./Week2/dairy-price-checker/) is a FastAPI and
-SQLite-backed progressive web app for recording milk deliveries and calculating
-farmer payments. It includes a farmer entry page, live price updates, and an
-admin dashboard for setting prices and reviewing or deleting daily records.
+The [dairy-price-checker](./Week2/dairy-price-checker/) is a FastAPI and SQLite
+progressive web app for recording milk deliveries and calculating farmer
+payments. It includes a farmer entry page, live price updates, and an admin
+dashboard for managing prices and daily records.
 
-### Week 3: Gemini assistants and automation exercises
+### Week 3: Gemini assistants and agents
 
-| Folder | What it does |
+| Folder | Description |
 |---|---|
-| [day-11/](./Week3/day-11/) | Gemini-powered command-line question-and-answer script. |
-| [day-12/](./Week3/day-12/) | A Kamau Stores customer-service assistant and a property inquiry extractor that returns structured JSON. |
-| [day-13/](./Week3/day-13/) | Otieno Wholesale conversational assistant with bounded context and a local conversation log; also includes the [Kisumu Pharmacy chatbot](./Week3/day-13/Kisumu-Pharmacy-Chatbot/) for staff support and contextual follow-up questions. |
-| [day-14/](./Week3/day-14/) | Gemini tool-calling agents: a Kamau Stores inventory and price assistant, and a [Kericho tea harvesting agent](./Week3/day-14/Kericho-AI-agent-tool/) that checks current weather and the six-hour rain forecast before recommending whether to harvest. |
+| [day-11/](./Week3/day-11/) | Command-line question-and-answer program using Google's Gemini API. |
+| [day-12/](./Week3/day-12/) | Kamau Stores customer-service assistant and a property inquiry extractor that returns structured JSON. |
+| [day-13/](./Week3/day-13/) | Otieno Wholesale chatbot with bounded conversation context and a local transcript; includes a [Kisumu Pharmacy chatbot](./Week3/day-13/Kisumu-Pharmacy-Chatbot/) for staff support and contextual follow-up questions. |
+| [day-14/](./Week3/day-14/) | Gemini tool-calling inventory and price assistant for Kamau Stores, plus the [Kericho tea harvesting agent](./Week3/day-14/Kericho-AI-agent-tool/) that checks weather and the six-hour rain forecast before recommending whether to harvest. |
 
-### Gemini AI email drafter
+### Week 4: customer balance lookup
 
-The [email-drafter/](./email-drafter/) command-line app uses Gemini to draft
-concise, professional Kenyan business emails from a topic. It prompts for a
-topic interactively or accepts one as a command-line argument. Its
-[README](./email-drafter/README.md) explains installation, API-key setup, both
-ways to run it, and Gemini API costs. The generated draft uses clear paragraph
-spacing; review it and replace any placeholders before sending.
+The [day-16 project](./Week4/day-16/) is a small Flask web app for looking up
+sample customer credit balances at an Eldoret hardware shop. Search by customer
+name in the browser or use the JSON API. Its project README covers the problem,
+solution, features, setup, run instructions, and example output.
 
 ## Repository structure
 
 ```text
 AI-Masterclass-II/
 ├── browser-api-call/               # Browser country lookup with local API proxy
-├── email-drafter/                  # Gemini-powered business email drafting CLI
-├── news-api/                       # NewsAPI backend and browser news reader
+├── email-drafter/                  # Gemini-powered email drafting CLI
+├── news-api/                       # NewsAPI service and browser reader
 ├── rest-country-api/               # Country information CLI
-├── travel-app/                     # Weather, GPS, and country-profile report
+├── travel-app/                     # Weather and country-profile report
 ├── weather-app/                    # Settlement and weather CLI
 ├── Week2/
 │   ├── dairy-price-checker/         # Dairy delivery and payment PWA
-│   ├── Day6.txt                    # AI-agent client brief
-│   ├── Day7.txt                    # AI-agent workflow proposal
-│   ├── Day8.txt                    # Dashboard handoff message
-│   └── day9.txt                    # Attendance SMS project agreement
-└── Week3/
-    ├── day-11/                     # Gemini Q&A
-    ├── day-12/                     # Store assistant and property extraction
-    ├── day-13/                     # Wholesale and pharmacy chatbots
-    └── day-14/
-        ├── ai-agents.py            # Kamau Stores inventory and price agent
-        └── Kericho-AI-agent-tool/  # Weather-based tea harvesting agent and tests
+│   ├── Day6.txt                     # AI-agent client brief
+│   ├── Day7.txt                     # AI-agent workflow proposal
+│   ├── Day8.txt                     # Dashboard handoff
+│   └── day9.txt                     # Attendance-SMS agreement
+├── Week3/
+│   ├── day-11/                     # Gemini Q&A
+│   ├── day-12/                     # Store assistant and property extraction
+│   ├── day-13/                     # Wholesale and pharmacy chatbots
+│   └── day-14/                     # Inventory and tea harvesting agents
+└── Week4/
+    └── day-16/                     # Hardware shop customer balance lookup
 ```
 
 ## Getting started
 
-There is no single dependency file or run command for the whole repository.
-Choose a project and follow its README for dependencies, API credentials, and
-run instructions. Some projects require third-party API keys; provide them
-through environment variables or a local `.env` file as described by that
-project.
+Choose a project and follow its README for project-specific dependencies,
+credentials, and commands. Python version and installation steps may differ
+between projects. Some applications call external services and require API
+keys; configure them through environment variables or a local `.env` file as
+described in the relevant project documentation.
 
 Keep API keys, passwords, customer conversations, and other private data out
 of source control. Do not commit `.env` files or generated data unless a
 project specifically requires a safe sample.
 
-## Auther
+## Author
 
-Branham Simiyu 
+Branham Simiyu
