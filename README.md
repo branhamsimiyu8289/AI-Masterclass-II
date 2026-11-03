@@ -16,10 +16,10 @@ repository.
 
 | Project | Description |
 |---|---|
-| [browser-api-call/](./browser-api-call/) | Browser-based country lookup backed by a local Python server, which keeps the REST Countries API credential out of the browser. |
+| [browser-api-call/](./browser-api-call/) | Country Info browser app. Its HTML page searches the REST Countries v5 API through a local Python server, which keeps the API key out of browser code. Configure a key in the project's `.env`, start `server.py`, and open the local page; see the [project README](./browser-api-call/README.md). |
 | [email-drafter/](./email-drafter/) | Gemini-powered command-line tool that drafts concise Kenyan business emails from a topic. See its README for setup, API-key configuration, and usage. |
 | [news-api/](./news-api/) | FastAPI service and browser interface for browsing politics, weather, sports, and agriculture headlines from NewsAPI. |
-| [rest-country-api/](./rest-country-api/) | Command-line country lookup for capitals, population, and currency using the REST Countries API. |
+| [rest-country-api/](./rest-country-api/) | Command-line country lookup for capitals, population, and currency using the REST Countries API; it requires an API key. |
 | [travel-app/](./travel-app/) | Travel weather and location tool that accepts place names or GPS coordinates, adds a country profile, and exports a JSON report. |
 | [weather-app/](./weather-app/) | Command-line settlement and weather lookup with local sunrise and sunset times, using OpenStreetMap Nominatim and OpenWeather. |
 
@@ -47,14 +47,16 @@ dashboard for managing prices and daily records.
 
 The [day-16 project](./Week4/day-16/) is a small Flask web app for looking up
 sample customer credit balances at an Eldoret hardware shop. Search by customer
-name in the browser or use the JSON API. Its project README covers the problem,
-solution, features, setup, run instructions, and example output.
+name in the browser or use the JSON API. It demonstrates a simple business
+lookup workflow using an HTML form, a Flask endpoint, and hardcoded sample
+balances. Its project README covers the problem, solution, features, setup, run
+instructions, and example output.
 
 ## Repository structure
 
 ```text
 AI-Masterclass-II/
-├── browser-api-call/               # Browser country lookup with local API proxy
+├── browser-api-call/               # Country Info HTML page and local API proxy
 ├── email-drafter/                  # Gemini-powered email drafting CLI
 ├── news-api/                       # NewsAPI service and browser reader
 ├── rest-country-api/               # Country information CLI

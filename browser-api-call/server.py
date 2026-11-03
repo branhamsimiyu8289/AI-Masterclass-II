@@ -9,7 +9,7 @@ from urllib.request import Request, urlopen
 
 
 APP_DIR = Path(__file__).resolve().parent
-ENV_FILE = APP_DIR.parent / "rest-country-api" / ".env"
+ENV_FILE = APP_DIR / ".env"
 API_URL = "https://api.restcountries.com/countries/v5/names.common/"
 
 
@@ -54,7 +54,7 @@ class CountryHandler(SimpleHTTPRequestHandler):
             return
 
         if parsed_url.path == "/":
-            self.path = "/day4_fetch.html"
+            self.path = "/rest-country.html"
         super().do_GET()
 
     def handle_country_request(self, query):
