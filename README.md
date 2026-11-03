@@ -90,5 +90,3 @@ project specifically requires a safe sample.
 ## Auther
 
 Branham Simiyu 
-
-For this customer-balance lookup tool, I would charge a hardware shop owner KES 5,000.

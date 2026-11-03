@@ -3,11 +3,11 @@ from flask import Flask, jsonify, request
 app = Flask(__name__)
 
 balances = {
-    "Amina Wanjiku": 12500,
-    "Brian Kiptoo": 8300,
-    "Chebet Jepkosgei": 21400,
-    "David Mwangi": 5600,
-    "Faith Naliaka": 17250,
+    "Branham Simiyu": 12500,
+    "Frank Odhiambo": 8300,
+    "Brian Obege": 21400,
+    "Owen Chole": 5600,
+    "David Wafula": 17250,
 }
 
 
