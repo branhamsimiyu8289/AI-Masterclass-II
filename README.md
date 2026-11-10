@@ -52,6 +52,11 @@ lookup workflow using an HTML form, a Flask endpoint, and hardcoded sample
 balances. Its project README covers the problem, solution, features, setup, run
 instructions, and example output.
 
+The [day-17 project](./Week4/day-17/) is a Flask Orders API for listing,
+creating, and looking up sample orders, as well as updating order statuses.
+Orders are stored in memory and reset when the server restarts. See the
+[project README](./Week4/day-17/README.md) for setup and example requests.
+
 ## Repository structure
 
 ```text
@@ -74,7 +79,8 @@ AI-Masterclass-II/
 │   ├── day-13/                     # Wholesale and pharmacy chatbots
 │   └── day-14/                     # Inventory and tea harvesting agents
 └── Week4/
-    └── day-16/                     # Hardware shop customer balance lookup
+    ├── day-16/                     # Hardware shop customer balance lookup
+    └── day-17/                     # Sample Orders API
 ```
 
 ## Getting started
