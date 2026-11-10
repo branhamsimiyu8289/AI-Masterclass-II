@@ -43,7 +43,7 @@ dashboard for managing prices and daily records.
 | [day-13/](./Week3/day-13/) | Otieno Wholesale chatbot with bounded conversation context and a local transcript; includes a [Kisumu Pharmacy chatbot](./Week3/day-13/Kisumu-Pharmacy-Chatbot/) for staff support and contextual follow-up questions. |
 | [day-14/](./Week3/day-14/) | Gemini tool-calling inventory and price assistant for Kamau Stores, plus the [Kericho tea harvesting agent](./Week3/day-14/Kericho-AI-agent-tool/) that checks weather and the six-hour rain forecast before recommending whether to harvest. |
 
-### Week 4: customer balance lookup
+### Week 4: business workflow APIs
 
 The [day-16 project](./Week4/day-16/) is a small Flask web app for looking up
 sample customer credit balances at an Eldoret hardware shop. Search by customer
@@ -52,10 +52,14 @@ lookup workflow using an HTML form, a Flask endpoint, and hardcoded sample
 balances. Its project README covers the problem, solution, features, setup, run
 instructions, and example output.
 
-The [day-17 project](./Week4/day-17/) is a Flask Orders API for listing,
-creating, and looking up sample orders, as well as updating order statuses.
-Orders are stored in memory and reset when the server restarts. See the
-[project README](./Week4/day-17/README.md) for setup and example requests.
+The [day-17 folder](./Week4/day-17/) contains two API projects. The Flask
+[Orders API](./Week4/day-17/README.md) lists, creates, and looks up sample
+orders and updates their statuses; orders are stored in memory. The nested
+[today's_exercise app](./Week4/day-17/today's_exercise/) is a FastAPI poultry
+egg-production manager with a farmer dashboard, SQLite persistence, shed and
+date filtering, tray calculations, and weekly WhatsApp reconciliation. See its
+[project README](./Week4/day-17/today's_exercise/README.md) for setup, API
+endpoints, and tests.
 
 ## Repository structure
 
@@ -80,7 +84,10 @@ AI-Masterclass-II/
 │   └── day-14/                     # Inventory and tea harvesting agents
 └── Week4/
     ├── day-16/                     # Hardware shop customer balance lookup
-    └── day-17/                     # Sample Orders API
+    └── day-17/
+        ├── README.md               # Sample Orders API
+        ├── restapi.py
+        └── today's_exercise/       # Poultry egg-production manager
 ```
 
 ## Getting started
