@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiambu Poultry Farm - Egg Production Tracker</title>
+  <style>
+    :root {
+      --primary: #15803d;
+      --primary-hover: #166534;
+      --primary-light: #dcfce7;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --text-main: #1e293b;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-focus: #22c55e;
+      --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.08), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text-main);
+      padding: 24px 16px;
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    header h1 {
+      font-size: 1.75rem;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      margin-top: 4px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h2 {
+      font-size: 1.2rem;
+      margin-bottom: 16px;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    /* Form Styles */
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 6px;
+    }
+
+    input[type="text"],
+    input[type="date"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px 14px;
+      font-size: 0.95rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text-main);
+      outline: none;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+
+    input:focus {
+      border-color: var(--border-focus);
+      box-shadow: 0 0 0 3px rgba(34, 197, 94, 0.2);
+    }
+
+    .quick-sheds {
+      display: flex;
+      gap: 8px;
+      margin-top: 6px;
+    }
+
+    .quick-sheds button {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      color: #475569;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+
+    .quick-sheds button:hover {
+      background: var(--primary-light);
+      color: var(--primary);
+      border-color: #86efac;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--primary);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.05s;
+    }
+
+    .btn-submit:hover {
+      background: var(--primary-hover);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.99);
+    }
+
+    /* Live Summary Banner */
+    .summary-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+
+    .stat-box {
+      background: #fff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: var(--shadow);
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .stat-value {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-top: 4px;
+    }
+
+    .stat-sub {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* Table */
+    .table-responsive {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.9rem;
+    }
+
+    th {
+      background: #f1f5f9;
+      color: #475569;
+      font-weight: 600;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+    }
+
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      color: #334155;
+    }
+
+    tr:hover td {
+      background-color: #f8fafc;
+    }
+
+    .running-total-col {
+      font-weight: 700;
+      color: var(--primary);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--text-muted);
+      font-style: italic;
+    }
+
+    /* Toast Notification */
+    #toast {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: #0f172a;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    #toast.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1><span>🐔</span> Kiambu Farm - Egg Production Tracker</h1>
+      <p>Log daily egg counts per shed and view running weekly totals in real time.</p>
+    </header>
+
+    <!-- Running Totals Display Cards -->
+    <div class="summary-bar">
+      <div class="stat-box">
+        <div class="stat-label">Total Eggs Logged</div>
+        <div id="displayTotalEggs" class="stat-value">0</div>
+        <div id="displayTotalTrays" class="stat-sub">0 trays (0 loose)</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Total Records</div>
+        <div id="displayRecordCount" class="stat-value" style="color: #0f172a;">0</div>
+        <div class="stat-sub">Cumulative daily logs</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-label">Active Sheds</div>
+        <div id="displayShedSummary" class="stat-value" style="color: #2563eb; font-size: 1.3rem; margin-top: 8px;">None</div>
+        <div class="stat-sub">Tracked in this session</div>
+      </div>
+    </div>
+
+    <!-- Daily Logging Form -->
+    <section class="card">
+      <h2><span>📝</span> Log Daily Egg Production</h2>
+      <form id="eggForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-group">
+          <label for="shedName">Shed Name</label>
+          <input type="text" id="shedName" required placeholder="e.g. Shed 1, Shed 2, or Shed 3">
+          <div class="quick-sheds">
+            <span style="font-size: 0.75rem; color: var(--text-muted); align-self: center;">Presets:</span>
+            <button type="button" onclick="setShed('Shed 1')">Shed 1</button>
+            <button type="button" onclick="setShed('Shed 2')">Shed 2</button>
+            <button type="button" onclick="setShed('Shed 3')">Shed 3</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="logDate">Date</label>
+          <input type="date" id="logDate" required>
+        </div>
+
+        <div class="form-group">
+          <label for="eggCount">Egg Count</label>
+          <input type="number" id="eggCount" min="0" required placeholder="e.g. 150">
+        </div>
+
+        <button type="submit" id="submitBtn" class="btn-submit">Submit Record</button>
+      </form>
+    </section>
+
+    <!-- Live Records Table -->
+    <section class="card">
+      <h2><span>📊</span> Production Records & Running Totals</h2>
+      <div class="table-responsive">
+        <table id="recordsTable">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Date</th>
+              <th>Shed Name</th>
+              <th style="text-align: right;">Count</th>
+              <th style="text-align: right;">Trays (30s)</th>
+              <th style="text-align: right;">Running Total</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody">
+            <tr>
+              <td colspan="6" class="empty-state">No records logged yet. Use the form above to add an entry.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toast"></div>
+
+  <!-- JavaScript using fetch() to communicate with the REST API -->
+  <script>
+    // Set default date to today
+    document.getElementById('logDate').value = new Date().toISOString().split('T')[0];
+
+    function setShed(name) {
+      document.getElementById('shedName').value = name;
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.innerText = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
+
+    // Handles form submission via POST /api/eggs without reloading the page
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+
+      const shedName = document.getElementById('shedName').value.trim();
+      const date = document.getElementById('logDate').value;
+      const count = parseInt(document.getElementById('eggCount').value, 10);
+
+      if (!shedName || !date || isNaN(count) || count < 0) {
+        alert('Please fill in all fields with valid data.');
+        return;
+      }
+
+      const submitBtn = document.getElementById('submitBtn');
+      submitBtn.disabled = true;
+      submitBtn.innerText = 'Saving...';
+
+      try {
+        const response = await fetch('/api/eggs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            shed_name: shedName,
+            date: date,
+            count: count
+          })
+        });
+
+        if (!response.ok) {
+          const errData = await response.json();
+          alert('Error logging record: ' + (errData.message || 'Unknown error'));
+          return;
+        }
+
+        showToast(`Successfully logged ${count} eggs for ${shedName}!`);
+
+        // Reset the egg count field for the next entry
+        document.getElementById('eggCount').value = '';
+
+        // Refresh the table and updated running totals via GET /api/eggs
+        await loadRecords();
+      } catch (err) {
+        console.error('Network error during POST /api/eggs:', err);
+        alert('Network error while saving record. Ensure Flask server is running.');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Submit Record';
+      }
+    }
+
+    // Fetches all records from GET /api/eggs and updates the table and running totals
+    async function loadRecords() {
+      try {
+        const response = await fetch('/api/eggs');
+        if (!response.ok) {
+          console.error('Failed to fetch egg records');
+          return;
+        }
+
+        const data = await response.json();
+        renderDashboard(data);
+      } catch (err) {
+        console.error('Error fetching /api/eggs:', err);
+      }
+    }
+
+    // Renders the records into the HTML table and updates running total counters
+    function renderDashboard(data) {
+      const records = data.records || [];
+      const totalEggs = data.total_eggs || 0;
+      const totalTrays = Math.floor(totalEggs / 30);
+      const looseEggs = totalEggs % 30;
+
+      // 1. Update running total counters on page
+      document.getElementById('displayTotalEggs').innerText = totalEggs.toLocaleString();
+      document.getElementById('displayTotalTrays').innerText = `${totalTrays.toLocaleString()} trays (${looseEggs} loose)`;
+      document.getElementById('displayRecordCount').innerText = records.length;
+
+      const shedBreakdown = data.shed_breakdown || {};
+      const shedNames = Object.keys(shedBreakdown);
+      if (shedNames.length > 0) {
+        document.getElementById('displayShedSummary').innerText = shedNames.join(', ');
+      } else {
+        document.getElementById('displayShedSummary').innerText = 'None';
+      }
+
+      // 2. Render simple HTML table rows
+      const tbody = document.getElementById('tableBody');
+      if (records.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="empty-state">No records logged yet. Use the form above to add an entry.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = records.map((rec, index) => {
+        const trays = Math.floor(rec.count / 30);
+        const loose = rec.count % 30;
+        return `
+          <tr>
+            <td>${index + 1}</td>
+            <td><code>${escapeHtml(rec.date)}</code></td>
+            <td><strong>${escapeHtml(rec.shed_name)}</strong></td>
+            <td style="text-align: right; font-weight: 600;">${rec.count.toLocaleString()}</td>
+            <td style="text-align: right; color: var(--text-muted);">${trays}t + ${loose}</td>
+            <td style="text-align: right;" class="running-total-col">${rec.running_total.toLocaleString()}</td>
+          </tr>
+        `;
+      }).join('');
+    }
+
+    function escapeHtml(text) {
+      return String(text).replace(/[&<>'"]/g, tag => ({
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        "'": '&#39;',
+        '"': '&quot;'
+      }[tag] || tag));
+    }
+
+    // Initial fetch on page load
+    loadRecords();
+  </script>
+</body>
+</html>

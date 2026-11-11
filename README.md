@@ -61,6 +61,23 @@ date filtering, tray calculations, and weekly WhatsApp reconciliation. See its
 [project README](./Week4/day-17/today's_exercise/README.md) for setup, API
 endpoints, and tests.
 
+The [day-18 full-stack project](./Week4/day-18/full-stack/) is a Flask web app
+for tracking daily egg production by shed. It provides a browser dashboard and
+REST API for recording entries and viewing running totals; records are kept in
+memory while the app is running. To install its dependencies and start it from
+PowerShell at the repository root:
+
+```powershell
+cd .\Week4\day-18\full-stack
+python -m pip install -r requirements.txt
+python app.py
+```
+
+Open `http://127.0.0.1:5000` in a browser. Run the install command with the
+same Python interpreter used to start the app; in VS Code, select that
+interpreter if Flask cannot be imported. See the [project README](./Week4/day-18/full-stack/README.md)
+for details and tests.
+
 ## Repository structure
 
 ```text
@@ -84,10 +101,12 @@ AI-Masterclass-II/
 │   └── day-14/                     # Inventory and tea harvesting agents
 └── Week4/
     ├── day-16/                     # Hardware shop customer balance lookup
-    └── day-17/
-        ├── README.md               # Sample Orders API
-        ├── restapi.py
-        └── today's_exercise/       # Poultry egg-production manager
+    ├── day-17/
+    │   ├── README.md               # Sample Orders API
+    │   ├── restapi.py
+    │   └── today's_exercise/       # Poultry egg-production manager
+    └── day-18/
+        └── full-stack/             # Flask egg-production tracker
 ```
 
 ## Getting started
