@@ -19,9 +19,9 @@ A lightweight, full-stack web application built for poultry farmers and farm man
    - Immediately updates the cumulative egg count and active shed summary banners.
 
 3. **REST API**:
-   - `POST /api/eggs`: Validates input and persists records in-memory.
+   - `POST /api/eggs`: Validates input and stores records in SQLite.
    - `GET /api/eggs`: Computes cumulative running totals across entries, calculates per-shed breakdowns, and returns structured JSON.
-   - `DELETE /api/eggs`: Helper endpoint to clear records for session resets and automated testing.
+   - `DELETE /api/eggs`: Disabled unless `RESET_TOKEN` is configured; then requires that token as a bearer token.
 
 ---
 
@@ -66,6 +66,21 @@ Open your web browser and navigate to:
 ```bash
 python test_app.py
 ```
+
+## Deploy to Render
+
+The `AI-Masterclass-II` repository includes a `render.yaml` Blueprint. Connect
+that repository in Render and create a Blueprint. It sets the app directory,
+installs `requirements.txt`, runs Gunicorn, and mounts a persistent disk at
+`/var/data` for the SQLite database. The persistent disk requires a paid Render
+web-service plan.
+
+The app's reset endpoint is disabled by default. To enable it, add a strong
+`RESET_TOKEN` environment variable in Render and send it as
+`Authorization: Bearer <token>` when calling `DELETE /api/eggs`. Keep the token
+private.
+
+The service health check is available at `/healthz`.
 
 ---
 

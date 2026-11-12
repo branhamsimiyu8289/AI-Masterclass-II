@@ -6,20 +6,60 @@ Allows logging daily egg production per shed, computing weekly running totals,
 and viewing real-time updates via JavaScript fetch() without page reload.
 """
 
+import hmac
+import os
+import sqlite3
+from contextlib import contextmanager
 from datetime import datetime
-from flask import Flask, jsonify, render_template, request
+
+from flask import Flask, abort, jsonify, render_template, request
 
 app = Flask(__name__)
+app.config["DATABASE_PATH"] = os.environ.get(
+    "DATABASE_PATH", os.path.join(app.instance_path, "eggs.db")
+)
+app.config["RESET_TOKEN"] = os.environ.get("RESET_TOKEN")
 
-# In-memory storage for egg production records
-egg_records = []
-_next_id = 1
+
+@contextmanager
+def database():
+    """Open the configured SQLite database and ensure its schema exists."""
+    database_path = app.config["DATABASE_PATH"]
+    os.makedirs(os.path.dirname(os.path.abspath(database_path)), exist_ok=True)
+    connection = sqlite3.connect(database_path, timeout=30)
+    connection.row_factory = sqlite3.Row
+    try:
+        connection.execute(
+            """
+            CREATE TABLE IF NOT EXISTS egg_records (
+                id INTEGER PRIMARY KEY AUTOINCREMENT,
+                shed_name TEXT NOT NULL,
+                date TEXT NOT NULL,
+                count INTEGER NOT NULL CHECK (count >= 0)
+            )
+            """
+        )
+        yield connection
+        connection.commit()
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        connection.close()
 
 
 @app.route("/")
 def index():
     """Renders the browser interface for the farm manager."""
     return render_template("index.html")
+
+
+@app.route("/healthz")
+def health_check():
+    """Check that the application and its database are available."""
+    with database() as db:
+        db.execute("SELECT 1")
+    return jsonify({"status": "ok"}), 200
 
 
 @app.route("/api/eggs", methods=["POST"])
@@ -33,8 +73,6 @@ def log_egg_record():
         "count": 145             # Non-negative integer
     }
     """
-    global _next_id
-
     data = request.get_json(silent=True)
     if not data or not isinstance(data, dict):
         return jsonify({
@@ -74,14 +112,17 @@ def log_egg_record():
             "message": "Field 'count' is required and must be a non-negative integer."
         }), 400
 
-    record = {
-        "id": _next_id,
-        "shed_name": shed_name.strip(),
-        "date": formatted_date,
-        "count": count
-    }
-    _next_id += 1
-    egg_records.append(record)
+    with database() as db:
+        cursor = db.execute(
+            "INSERT INTO egg_records (shed_name, date, count) VALUES (?, ?, ?)",
+            (shed_name.strip(), formatted_date, count),
+        )
+        record = {
+            "id": cursor.lastrowid,
+            "shed_name": shed_name.strip(),
+            "date": formatted_date,
+            "count": count,
+        }
 
     return jsonify({
         "message": "Egg record logged successfully.",
@@ -95,11 +136,16 @@ def get_egg_records():
     Return all egg records, each with its cumulative running total,
     plus overall summary totals and per-shed breakdowns.
     """
+    with database() as db:
+        records = db.execute(
+            "SELECT id, shed_name, date, count FROM egg_records ORDER BY id"
+        ).fetchall()
+
     records_with_running_total = []
     running_total = 0
     shed_totals = {}
 
-    for rec in egg_records:
+    for rec in records:
         running_total += rec["count"]
         shed_name = rec["shed_name"]
         shed_totals[shed_name] = shed_totals.get(shed_name, 0) + rec["count"]
@@ -122,12 +168,24 @@ def get_egg_records():
 
 @app.route("/api/eggs", methods=["DELETE"])
 def reset_records():
-    """Optional endpoint to reset in-memory data during testing."""
-    global _next_id
-    egg_records.clear()
-    _next_id = 1
+    """Clear records only when a configured bearer token is supplied."""
+    reset_token = app.config.get("RESET_TOKEN")
+    if not reset_token:
+        abort(404)
+
+    authorization = request.headers.get("Authorization", "")
+    supplied_token = authorization[7:] if authorization.startswith("Bearer ") else ""
+    if not hmac.compare_digest(reset_token, supplied_token):
+        return jsonify({"error": "Forbidden", "message": "A valid reset token is required."}), 403
+
+    with database() as db:
+        db.execute("DELETE FROM egg_records")
     return jsonify({"message": "All egg records cleared successfully."}), 200
 
 
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000, debug=True)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", "5000")),
+        debug=False,
+    )

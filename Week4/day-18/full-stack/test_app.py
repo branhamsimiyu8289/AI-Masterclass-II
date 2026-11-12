@@ -8,15 +8,30 @@ Tests:
 """
 
 import unittest
-from app import app, egg_records
+import os
+import sqlite3
+import tempfile
+from contextlib import closing
+
+from app import app, database
 
 
 class FullStackEggTrackerTestCase(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.temp_dir = tempfile.TemporaryDirectory()
+        app.config["DATABASE_PATH"] = os.path.join(cls.temp_dir.name, "test-eggs.db")
+
+    @classmethod
+    def tearDownClass(cls):
+        cls.temp_dir.cleanup()
+
     def setUp(self):
         app.config["TESTING"] = True
+        app.config["RESET_TOKEN"] = "test-reset-token"
         self.client = app.test_client()
-        # Reset storage before every test
-        egg_records.clear()
+        with database() as db:
+            db.execute("DELETE FROM egg_records")
 
     def test_browser_page_renders_form_and_table(self):
         """Verify GET / returns the HTML page containing the form, table, and fetch logic."""
@@ -103,6 +118,35 @@ class FullStackEggTrackerTestCase(unittest.TestCase):
         # Invalid date format
         r3 = self.client.post("/api/eggs", json={"shed_name": "Shed 1", "date": "not-a-date", "count": 100})
         self.assertEqual(r3.status_code, 400)
+
+    def test_records_are_written_to_persistent_sqlite_database(self):
+        response = self.client.post("/api/eggs", json={
+            "shed_name": "Shed 1",
+            "date": "2026-11-11",
+            "count": 120
+        })
+        self.assertEqual(response.status_code, 201)
+
+        with closing(sqlite3.connect(app.config["DATABASE_PATH"])) as db:
+            row = db.execute("SELECT shed_name, count FROM egg_records").fetchone()
+        self.assertEqual(row, ("Shed 1", 120))
+
+    def test_health_check_includes_database(self):
+        response = self.client.get("/healthz")
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.get_json(), {"status": "ok"})
+
+    def test_reset_endpoint_is_disabled_without_token_and_protected_with_token(self):
+        app.config["RESET_TOKEN"] = None
+        self.assertEqual(self.client.delete("/api/eggs").status_code, 404)
+
+        app.config["RESET_TOKEN"] = "test-reset-token"
+        self.assertEqual(self.client.delete("/api/eggs").status_code, 403)
+        response = self.client.delete(
+            "/api/eggs",
+            headers={"Authorization": "Bearer test-reset-token"},
+        )
+        self.assertEqual(response.status_code, 200)
 
 
 if __name__ == "__main__":

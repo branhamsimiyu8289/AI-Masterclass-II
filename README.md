@@ -63,9 +63,10 @@ endpoints, and tests.
 
 The [day-18 full-stack project](./Week4/day-18/full-stack/) is a Flask web app
 for tracking daily egg production by shed. It provides a browser dashboard and
-REST API for recording entries and viewing running totals; records are kept in
-memory while the app is running. To install its dependencies and start it from
-PowerShell at the repository root:
+REST API for recording entries and viewing running totals. Records are stored
+in SQLite, so they persist across app restarts when the database is on
+persistent storage. To install its dependencies and start it from PowerShell
+at the repository root:
 
 ```powershell
 cd .\Week4\day-18\full-stack
@@ -78,10 +79,18 @@ same Python interpreter used to start the app; in VS Code, select that
 interpreter if Flask cannot be imported. See the [project README](./Week4/day-18/full-stack/README.md)
 for details and tests.
 
+For Render deployment, create a Blueprint from this repository; the root
+[render.yaml](./render.yaml) configures the app's subdirectory, Gunicorn start
+command, health check, and persistent disk for the SQLite database. The
+persistent disk requires a paid Render web-service plan. The optional
+`DELETE /api/eggs` endpoint is disabled unless a `RESET_TOKEN` environment
+variable is configured.
+
 ## Repository structure
 
 ```text
 AI-Masterclass-II/
+├── render.yaml                     # Render deployment for the Day 18 tracker
 ├── browser-api-call/               # Country Info HTML page and local API proxy
 ├── email-drafter/                  # Gemini-powered email drafting CLI
 ├── news-api/                       # NewsAPI service and browser reader

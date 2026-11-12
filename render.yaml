@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: egg-production-tracker
+    runtime: python
+    plan: starter
+    rootDir: Week4/day-18/full-stack
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /healthz
+    disk:
+      name: egg-production-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATABASE_PATH
+        value: /var/data/eggs.db
