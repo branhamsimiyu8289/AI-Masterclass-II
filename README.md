@@ -86,6 +86,11 @@ persistent disk requires a paid Render web-service plan. The optional
 `DELETE /api/eggs` endpoint is disabled unless a `RESET_TOKEN` environment
 variable is configured.
 
+The [day-19 README](./Week4/day-19/README.md) presents the Kiambu Poultry Farm
+egg tracker, including its [live demo](https://egg-production-tracker-v8w1.onrender.com/),
+feature overview, setup and testing instructions, Render deployment notes, and
+Kenyan SME market and pricing analysis.
+
 ## Repository structure
 
 ```text
@@ -114,8 +119,10 @@ AI-Masterclass-II/
     │   ├── README.md               # Sample Orders API
     │   ├── restapi.py
     │   └── today's_exercise/       # Poultry egg-production manager
-    └── day-18/
-        └── full-stack/             # Flask egg-production tracker
+    ├── day-18/
+    │   └── full-stack/             # Flask egg-production tracker
+    └── day-19/
+        └── README.md               # Egg tracker overview and Kenyan SME analysis
 ```
 
 ## Getting started
