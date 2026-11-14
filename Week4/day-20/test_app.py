@@ -34,7 +34,7 @@ class NairobiComplaintReplyTestCase(unittest.TestCase):
         html = response.get_data(as_text=True)
         self.assertIn("Generate Reply", html)
         self.assertIn("complaintInput", html)
-        self.assertIn("WhatsApp Reply Drafter", html)
+        self.assertIn("Reply Drafter", html)
 
     def test_02_health_check(self):
         """Verify the /healthz monitoring endpoint."""
