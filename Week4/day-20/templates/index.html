@@ -534,6 +534,33 @@
     <!-- Main Card -->
     <div class="app-card">
 
+      <!-- Gemini AI Status & Custom Key Bar -->
+      <div class="api-key-bar" style="display: flex; justify-content: space-between; align-items: center; background: #f8fafc; border: 1px solid #e2e8f0; border-radius: var(--radius-sm); padding: 0.5rem 0.85rem; margin-bottom: 1.25rem; font-size: 0.82rem;">
+        <div style="display: flex; align-items: center; gap: 0.45rem;">
+          <span style="font-size: 1rem;">🤖</span>
+          <span><strong>AI Engine:</strong> Google Gemini API</span>
+          <span id="apiKeyStatusBadge" style="background: #d1fae5; color: #065f46; font-size: 0.72rem; font-weight: 600; padding: 0.15rem 0.5rem; border-radius: 9999px;">✓ Connected</span>
+        </div>
+        <button type="button" onclick="toggleApiKeyInput()" style="background: none; border: none; color: var(--primary); font-size: 0.8rem; font-weight: 600; cursor: pointer; text-decoration: underline;">
+          Set Custom Key
+        </button>
+      </div>
+
+      <!-- Collapsible Key Input -->
+      <div id="apiKeyCollapse" style="display: none; background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: var(--radius-sm); padding: 0.75rem 0.85rem; margin-bottom: 1.25rem; font-size: 0.85rem;">
+        <label for="customApiKey" style="font-weight: 600; display: block; margin-bottom: 0.35rem; color: #1e293b;">
+          Enter your Gemini API Key (optional):
+        </label>
+        <div style="display: flex; gap: 0.5rem;">
+          <input type="password" id="customApiKey" placeholder="Paste your Gemini AI API key here..." style="flex: 1; padding: 0.45rem 0.65rem; border: 1px solid #cbd5e1; border-radius: 6px; font-family: 'JetBrains Mono', monospace; font-size: 0.8rem;">
+          <button type="button" onclick="saveApiKey()" style="background: var(--primary); color: #fff; border: none; border-radius: 6px; padding: 0.45rem 0.85rem; font-weight: 600; cursor: pointer;">Save</button>
+          <button type="button" onclick="clearApiKey()" style="background: #e2e8f0; color: #334155; border: none; border-radius: 6px; padding: 0.45rem 0.65rem; font-size: 0.78rem; cursor: pointer;">Reset</button>
+        </div>
+        <p style="font-size: 0.75rem; color: #64748b; margin-top: 0.35rem; margin-bottom: 0;">
+          Stored in your browser's localStorage. Overrides the server environment key if provided.
+        </p>
+      </div>
+
       <!-- Quick Test Chips -->
       <div class="samples-wrapper">
         <div class="samples-label">
@@ -671,6 +698,47 @@
       });
     });
 
+    // Custom Gemini API Key UI helpers
+    function toggleApiKeyInput() {
+      const el = document.getElementById('apiKeyCollapse');
+      el.style.display = el.style.display === 'none' ? 'block' : 'none';
+      if (el.style.display === 'block') {
+        document.getElementById('customApiKey').focus();
+      }
+    }
+
+    function saveApiKey() {
+      const val = document.getElementById('customApiKey').value.trim();
+      if (val) {
+        localStorage.setItem('user_gemini_key', val);
+        const badge = document.getElementById('apiKeyStatusBadge');
+        badge.textContent = '✓ Using Custom Key';
+        badge.style.background = '#e0e7ff';
+        badge.style.color = '#3730a3';
+        document.getElementById('apiKeyCollapse').style.display = 'none';
+      }
+    }
+
+    function clearApiKey() {
+      localStorage.removeItem('user_gemini_key');
+      document.getElementById('customApiKey').value = '';
+      const badge = document.getElementById('apiKeyStatusBadge');
+      badge.textContent = '✓ Connected';
+      badge.style.background = '#d1fae5';
+      badge.style.color = '#065f46';
+      document.getElementById('apiKeyCollapse').style.display = 'none';
+    }
+
+    // Initialize custom key state from localStorage on load
+    const savedUserKey = localStorage.getItem('user_gemini_key');
+    if (savedUserKey) {
+      document.getElementById('customApiKey').value = savedUserKey;
+      const badge = document.getElementById('apiKeyStatusBadge');
+      badge.textContent = '✓ Using Custom Key';
+      badge.style.background = '#e0e7ff';
+      badge.style.color = '#3730a3';
+    }
+
     // Form Submission: Calls /api/generate-reply
     async function handleGenerate(e) {
       e.preventDefault();
@@ -684,11 +752,15 @@
       errorBanner.style.display = 'none';
 
       try {
+        const headers = { 'Content-Type': 'application/json' };
+        const activeKey = localStorage.getItem('user_gemini_key');
+        if (activeKey) {
+          headers['X-Gemini-Key'] = activeKey;
+        }
+
         const response = await fetch('/api/generate-reply', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: headers,
           body: JSON.stringify({ complaint: text })
         });
 
