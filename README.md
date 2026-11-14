@@ -96,8 +96,9 @@ businesses (courier services, shops, Airbnbs, and restaurants) receiving custome
 complaints on WhatsApp. Powered by Google Gemini AI (with a resilient local SME
 engine fallback), it provides an ultra-minimal interface (one text box, one button)
 that instantly drafts polite, blame-free, reassuring replies with clear next steps.
-See its [project README](./Week4/day-20/README.md) for features, Render deployment
-guide, automated test suite, and commercial client pricing strategy.
+Try the [live demo](https://nairobi-complaint-reply-tool.onrender.com/) or see its
+[project README](./Week4/day-20/README.md) for features, setup, and commercial
+client pricing strategy.
 
 ## Repository structure
 
