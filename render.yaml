@@ -14,3 +14,16 @@ services:
     envVars:
       - key: DATABASE_PATH
         value: /var/data/eggs.db
+  - type: web
+    name: nairobi-complaint-reply-tool
+    runtime: python
+    plan: free
+    rootDir: Week4/day-20
+    buildCommand: pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    healthCheckPath: /healthz
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
+      - key: PORT
+        value: 10000

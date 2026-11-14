@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nairobi Business WhatsApp Complaint Reply Drafter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #ecfdf5;
+      --accent: #25D366; /* WhatsApp Green */
+      --accent-dark: #128C7E;
+      --surface: #ffffff;
+      --bg: #f8fafc;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.08), 0 4px 6px -4px rgb(0 0 0 / 0.04);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 4rem;
+      flex: 1;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .badge-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      padding: 0.35rem 0.85rem;
+      border-radius: 9999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: #334155;
+      margin-bottom: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .badge-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.3);
+    }
+
+    h1 {
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* Target Sectors Pill Bar */
+    .sectors-bar {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.25rem;
+    }
+
+    .sector-tag {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.8rem;
+      color: #475569;
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    /* Main Card */
+    .app-card {
+      background-color: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+    }
+
+    /* Quick Test Samples */
+    .samples-wrapper {
+      margin-bottom: 1.25rem;
+    }
+
+    .samples-label {
+      font-size: 0.8rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .sample-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .chip-btn {
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.85rem;
+      font-size: 0.82rem;
+      color: #334155;
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: 500;
+      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .chip-btn:hover {
+      background-color: var(--primary-light);
+      border-color: #a7f3d0;
+      color: var(--primary-dark);
+      transform: translateY(-1px);
+    }
+
+    /* Form Area (One Textbox, One Button) */
+    .form-group {
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .char-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    textarea.complaint-box {
+      width: 100%;
+      min-height: 150px;
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background-color: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      resize: vertical;
+      line-height: 1.5;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    textarea.complaint-box:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    textarea.complaint-box::placeholder {
+      color: #94a3b8;
+    }
+
+    /* Primary Action Button ("Generate Reply") */
+    .btn-generate {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
+    }
+
+    .btn-generate:hover:not(:disabled) {
+      background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(5, 150, 105, 0.3);
+    }
+
+    .btn-generate:active:not(:disabled) {
+      transform: translateY(0);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Spinner */
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Error Alert */
+    .error-banner {
+      display: none;
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--radius-md);
+      color: #991b1b;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Result Area (Returned on the same page) */
+    .result-section {
+      display: none;
+      margin-top: 2rem;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .result-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .result-engine-badge {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: #065f46;
+      background-color: #d1fae5;
+      padding: 0.2rem 0.6rem;
+      border-radius: 9999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* WhatsApp Style Bubble */
+    .whatsapp-preview-card {
+      background-color: #efeae2;
+      background-image: radial-gradient(#d6d0c4 1px, transparent 1px);
+      background-size: 16px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .whatsapp-bubble {
+      background-color: #ffffff;
+      border-radius: 8px;
+      border-top-left-radius: 0;
+      padding: 1rem 1.15rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+      max-width: 100%;
+      position: relative;
+    }
+
+    .whatsapp-bubble::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border-top: 0 solid transparent;
+      border-right: 8px solid #ffffff;
+      border-bottom: 8px solid transparent;
+    }
+
+    .bubble-text {
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    .bubble-meta {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+
+    /* Action Buttons Bar below Draft */
+    .draft-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .btn-action {
+      flex: 1;
+      min-width: 170px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-copy {
+      background-color: #ffffff;
+      color: #1e293b;
+      border: 1.5px solid #cbd5e1;
+    }
+
+    .btn-copy:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .btn-copy.copied {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .btn-whatsapp {
+      background-color: var(--accent);
+      color: #ffffff;
+      border: 1.5px solid var(--accent-dark);
+    }
+
+    .btn-whatsapp:hover {
+      background-color: var(--accent-dark);
+    }
+
+    /* Quality Rules Verification Checklist */
+    .rules-checklist {
+      margin-top: 1.25rem;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: var(--radius-md);
+      padding: 0.85rem 1rem;
+    }
+
+    .rules-checklist-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #475569;
+      margin-bottom: 0.5rem;
+    }
+
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 0.4rem;
+    }
+
+    .rule-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.8rem;
+      color: #1e293b;
+    }
+
+    .rule-check {
+      color: #059669;
+      font-weight: bold;
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-top: 1px solid var(--card-border);
+      background-color: #ffffff;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      h1 {
+        font-size: 1.75rem;
+      }
+      .app-card {
+        padding: 1.25rem;
+      }
+      .btn-action {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <!-- Header -->
+    <header>
+      <div class="badge-bar">
+        <span class="badge-dot"></span>
+        Nairobi SME Toolkit • WhatsApp Reply Drafter
+      </div>
+      <h1>Respond to Customer Complaints <span>in Seconds</span></h1>
+      <p class="subtitle">
+        Designed for Nairobi courier desks, Airbnb hosts, restaurants, and retail shops receiving complaints on WhatsApp. Turn tension into calm, professional drafts without spending 20 minutes writing.
+      </p>
+
+      <div class="sectors-bar">
+        <span class="sector-tag">🛵 Courier Services</span>
+        <span class="sector-tag">🍲 Restaurants & Food</span>
+        <span class="sector-tag">🏡 Airbnb & Stays</span>
+        <span class="sector-tag">👗 Boutique Shops</span>
+      </div>
+    </header>
+
+    <!-- Main Card -->
+    <div class="app-card">
+
+      <!-- Quick Test Chips -->
+      <div class="samples-wrapper">
+        <div class="samples-label">
+          <span>⚡ Try a Real Nairobi Complaint Scenario:</span>
+        </div>
+        <div class="sample-chips" id="sampleChips">
+          {% for sample in samples %}
+          <button 
+            type="button" 
+            class="chip-btn" 
+            data-text="{{ sample.text }}"
+            title="Click to load: {{ sample.title }}">
+            {{ sample.title }}
+          </button>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- Core Form: One text box, one button -->
+      <form id="replyForm" onsubmit="handleGenerate(event)">
+        <div class="form-group">
+          <div class="form-label">
+            <label for="complaintInput">Paste Customer Complaint Message</label>
+            <span class="char-count" id="charCount">0 characters</span>
+          </div>
+          <textarea 
+            id="complaintInput" 
+            class="complaint-box" 
+            placeholder="e.g. 'Your rider picked up my package in Westlands at 11 AM promising delivery to Karen by 1 PM. It is now 4:30 PM, the client is leaving the office, and the rider's phone is switched off! Explain this!'"
+            required></textarea>
+        </div>
+
+        <button type="submit" class="btn-generate" id="generateBtn">
+          <span class="spinner" id="spinner"></span>
+          <span id="btnText">Generate Reply</span>
+        </button>
+      </form>
+
+      <!-- Error Banner -->
+      <div class="error-banner" id="errorBanner">
+        <span>⚠️</span>
+        <span id="errorMessage">An error occurred while generating the reply.</span>
+      </div>
+
+      <!-- Result Section (Back on the same page) -->
+      <div class="result-section" id="resultSection">
+        <div class="result-header">
+          <div class="result-title">
+            <span>📱 Draft Response for WhatsApp</span>
+          </div>
+          <div class="result-engine-badge" id="engineBadge">
+            <span>Powered by Gemini</span>
+          </div>
+        </div>
+
+        <!-- WhatsApp Preview Card -->
+        <div class="whatsapp-preview-card">
+          <div class="whatsapp-bubble">
+            <div class="bubble-text" id="draftOutput"></div>
+            <div class="bubble-meta">
+              <span id="bubbleTime">Just now</span>
+              <span style="color: #38bdf8; font-weight: bold;">✓✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="draft-actions">
+          <button type="button" class="btn-action btn-copy" id="copyBtn" onclick="copyDraft()">
+            <span id="copyIcon">📋</span>
+            <span id="copyText">Copy to Clipboard</span>
+          </button>
+          <a href="#" class="btn-action btn-whatsapp" id="whatsappLink" target="_blank" rel="noopener">
+            <span>💬</span>
+            <span>Send via WhatsApp Web</span>
+          </a>
+        </div>
+
+        <!-- Strict AI Rules Checklist -->
+        <div class="rules-checklist">
+          <div class="rules-checklist-title">Verified Kenyan Business Standards:</div>
+          <div class="rules-grid">
+            <div class="rule-item"><span class="rule-check">✓</span> Polite Kenyan Greeting</div>
+            <div class="rule-item"><span class="rule-check">✓</span> Empathetic Issue Acknowledgment</div>
+            <div class="rule-item"><span class="rule-check">✓</span> Zero Blame Placed</div>
+            <div class="rule-item"><span class="rule-check">✓</span> No Over-Promising</div>
+            <div class="rule-item"><span class="rule-check">✓</span> Clear Actionable Next Step</div>
+            <div class="rule-item"><span class="rule-check">✓</span> WhatsApp Ready Paragraphs</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Built for Nairobi SMEs (Shops, Couriers, Airbnbs, Restaurants) • Portfolio Item by <strong>Branham Simiyu</strong>
+    </p>
+    <p style="margin-top: 0.35rem; font-size: 0.78rem;">
+      Ready for deployment on Render. Tested with Gemini API & resilient local SME engine.
+    </p>
+  </footer>
+
+  <script>
+    const textarea = document.getElementById('complaintInput');
+    const charCount = document.getElementById('charCount');
+    const generateBtn = document.getElementById('generateBtn');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
+    const errorBanner = document.getElementById('errorBanner');
+    const errorMessage = document.getElementById('errorMessage');
+    const resultSection = document.getElementById('resultSection');
+    const draftOutput = document.getElementById('draftOutput');
+    const engineBadge = document.getElementById('engineBadge');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyText = document.getElementById('copyText');
+    const whatsappLink = document.getElementById('whatsappLink');
+
+    // Live character counter
+    textarea.addEventListener('input', () => {
+      charCount.textContent = `${textarea.value.length} characters`;
+    });
+
+    // Preset chip clicks
+    document.querySelectorAll('.chip-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        textarea.value = button.getAttribute('data-text');
+        charCount.textContent = `${textarea.value.length} characters`;
+        textarea.focus();
+        // Clear previous result
+        resultSection.style.display = 'none';
+        errorBanner.style.display = 'none';
+      });
+    });
+
+    // Form Submission: Calls /api/generate-reply
+    async function handleGenerate(e) {
+      e.preventDefault();
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      // Loading state
+      generateBtn.disabled = true;
+      spinner.style.display = 'inline-block';
+      btnText.textContent = 'Generating Reply...';
+      errorBanner.style.display = 'none';
+
+      try {
+        const response = await fetch('/api/generate-reply', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ complaint: text })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || 'Failed to generate reply');
+        }
+
+        // Display results on the same page
+        draftOutput.textContent = data.reply;
+        engineBadge.textContent = data.source || 'Gemini 3.5 Flash';
+        
+        // Update WhatsApp web link
+        const encoded = encodeURIComponent(data.reply);
+        whatsappLink.href = `https://wa.me/?text=${encoded}`;
+
+        resultSection.style.display = 'block';
+        resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        // Reset copy button state
+        copyBtn.classList.remove('copied');
+        copyText.textContent = 'Copy to Clipboard';
+      } catch (err) {
+        errorMessage.textContent = err.message || 'Network error. Please try again.';
+        errorBanner.style.display = 'flex';
+      } finally {
+        generateBtn.disabled = false;
+        spinner.style.display = 'none';
+        btnText.textContent = 'Generate Reply';
+      }
+    }
+
+    // Copy draft to clipboard
+    async function copyDraft() {
+      const text = draftOutput.textContent;
+      if (!text) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.classList.add('copied');
+        copyText.textContent = 'Copied to WhatsApp Clipboard!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyText.textContent = 'Copy to Clipboard';
+        }, 2500);
+      } catch (err) {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.classList.add('copied');
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyText.textContent = 'Copy to Clipboard';
+        }, 2500);
+      }
+    }
+  </script>
+</body>
+</html>

@@ -91,6 +91,14 @@ egg tracker, including its [live demo](https://egg-production-tracker-v8w1.onren
 feature overview, setup and testing instructions, Render deployment notes, and
 Kenyan SME market and pricing analysis.
 
+The [day-20 project](./Week4/day-20/) is a focused web tool built for small Nairobi
+businesses (courier services, shops, Airbnbs, and restaurants) receiving customer
+complaints on WhatsApp. Powered by Google Gemini AI (with a resilient local SME
+engine fallback), it provides an ultra-minimal interface (one text box, one button)
+that instantly drafts polite, blame-free, reassuring replies with clear next steps.
+See its [project README](./Week4/day-20/README.md) for features, Render deployment
+guide, automated test suite, and commercial client pricing strategy.
+
 ## Repository structure
 
 ```text
@@ -121,8 +129,15 @@ AI-Masterclass-II/
     │   └── today's_exercise/       # Poultry egg-production manager
     ├── day-18/
     │   └── full-stack/             # Flask egg-production tracker
-    └── day-19/
-        └── README.md               # Egg tracker overview and Kenyan SME analysis
+    ├── day-19/
+    │   └── README.md               # Egg tracker overview and Kenyan SME analysis
+    └── day-20/
+        ├── app.py                  # Flask web backend & Gemini reply generator
+        ├── templates/index.html    # Single-page WhatsApp reply interface
+        ├── test_app.py             # Integration & AI quality test suite
+        ├── render.yaml             # Render blueprint configuration
+        ├── requirements.txt        # Python package dependencies
+        └── README.md               # Tool overview & Kenyan SME client pricing strategy
 ```
 
 ## Getting started
