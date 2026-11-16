@@ -8,15 +8,11 @@ A law firm located on Moi Avenue in Nairobi downloads client documents into a si
 
 This tool automatically categorizes these documents into dedicated subfolders and generates a complete audit trail in `sort_log.txt`.
 
-## Category Rules
+## Estimated Time Savings and Setup Fee
 
-| Category | Matching File Extensions | Typical Content |
-| :--- | :--- | :--- |
-| **Contracts/** | `.docx`, `.doc` | Commercial agreements, leases, employment contracts, deeds |
-| **Evidence/** | `.jpg`, `.jpeg`, `.png` | Accident scene photos, scanned national IDs, passport copies |
-| **Filings/** | `.pdf` | Court petitions, affidavits of service, pleadings, court orders |
-| **Correspondence/** | `.txt`, `.eml` | Client conference notes, email threads, written instructions |
-| **Other/** | All remaining extensions | Financial receipts (`.xlsx`), audio briefings (`.mp3`), archives (`.zip`) |
+These are planning estimates, not measured results. For a firm sorting about 100 files each week, assume manual sorting takes 1–2 minutes per file (about 1 hour 40 minutes to 3 hours 20 minutes). Allowing 15–30 minutes to run the sorter and review its preview, the estimated net saving is roughly **1–3 staff hours per week**. Actual savings depend on file volume and how much review each batch needs; the sorter categorizes by extension and does not inspect document contents.
+
+For a one-time client setup, I would quote around **KSh 35,000** for installing the tool on one workstation, configuring its categories, testing it with sample files, and providing a short handover. This is an example quote, not a market-rate survey. A web upload interface, integrations, multiple workstations, and ongoing support would be scoped and priced separately.
 
 ## Key Features
 
@@ -42,12 +38,6 @@ This tool automatically categorizes these documents into dedicated subfolders an
    ```
 
 The app groups files by extension, creates category folders inside the intake folder, and writes a `sort_log.txt` audit log there. It sorts files directly inside the intake folder, not files in nested folders.
-
-## Estimated Time Savings and Setup Fee
-
-These are planning estimates, not measured results. For a firm sorting about 100 files each week, assume manual sorting takes 1–2 minutes per file (about 1 hour 40 minutes to 3 hours 20 minutes). Allowing 15–30 minutes to run the sorter and review its preview, the estimated net saving is roughly **1–3 staff hours per week**. Actual savings depend on file volume and how much review each batch needs; the sorter categorizes by extension and does not inspect document contents.
-
-For a one-time client setup, I would quote around **KSh 35,000** for installing the tool on one workstation, configuring its categories, testing it with sample files, and providing a short handover. This is an example quote, not a market-rate survey. A web upload interface, integrations, multiple workstations, and ongoing support would be scoped and priced separately.
 
 ## CLI Usage
 
