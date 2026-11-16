@@ -100,6 +100,16 @@ Try the [live demo](https://nairobi-complaint-reply-tool.onrender.com/) or see i
 [project README](./Week4/day-20/README.md) for features, setup, and commercial
 client pricing strategy.
 
+### Week 5: file automation
+
+The [day-21 file-automation CLI](./Week5/day-21/file-automation/app.py) demonstrates
+safe, preview-first file tasks, including organizing files, spreadsheet backups,
+and photo renaming. Run `python app.py --help` from its folder to see the commands.
+
+The [day-21 law-firm sorter](./Week5/day-21/law-firm-sorter/README.md) groups
+documents by file extension, previews moves before applying them, and records
+completed moves in an audit log. Its README explains local-folder usage and setup.
+
 ## Repository structure
 
 ```text
@@ -122,23 +132,27 @@ AI-Masterclass-II/
 │   ├── day-12/                     # Store assistant and property extraction
 │   ├── day-13/                     # Wholesale and pharmacy chatbots
 │   └── day-14/                     # Inventory and tea harvesting agents
-└── Week4/
-    ├── day-16/                     # Hardware shop customer balance lookup
-    ├── day-17/
-    │   ├── README.md               # Sample Orders API
-    │   ├── restapi.py
-    │   └── today's_exercise/       # Poultry egg-production manager
-    ├── day-18/
-    │   └── full-stack/             # Flask egg-production tracker
-    ├── day-19/
-    │   └── README.md               # Egg tracker overview and Kenyan SME analysis
-    └── day-20/
-        ├── app.py                  # Flask web backend & Gemini reply generator
-        ├── templates/index.html    # Single-page WhatsApp reply interface
-        ├── test_app.py             # Integration & AI quality test suite
-        ├── render.yaml             # Render blueprint configuration
-        ├── requirements.txt        # Python package dependencies
-        └── README.md               # Tool overview & Kenyan SME client pricing strategy
+├── Week4/
+│   ├── day-16/                     # Hardware shop customer balance lookup
+│   ├── day-17/
+│   │   ├── README.md               # Sample Orders API
+│   │   ├── restapi.py
+│   │   └── today's_exercise/       # Poultry egg-production manager
+│   ├── day-18/
+│   │   └── full-stack/             # Flask egg-production tracker
+│   ├── day-19/
+│   │   └── README.md               # Egg tracker overview and Kenyan SME analysis
+│   └── day-20/
+│       ├── app.py                  # Flask web backend & Gemini reply generator
+│       ├── templates/index.html    # Single-page WhatsApp reply interface
+│       ├── test_app.py             # Integration & AI quality test suite
+│       ├── render.yaml             # Render blueprint configuration
+│       ├── requirements.txt        # Python package dependencies
+│       └── README.md               # Tool overview & Kenyan SME client pricing strategy
+└── Week5/
+    └── day-21/
+        ├── file-automation/        # Safe file automation CLI
+        └── law-firm-sorter/        # Extension-based legal document sorter
 ```
 
 ## Getting started
