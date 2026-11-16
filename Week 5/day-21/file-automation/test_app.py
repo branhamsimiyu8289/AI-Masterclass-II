@@ -115,6 +115,15 @@ class FileAutomationTests(unittest.TestCase):
         self.assertIn("Would copy:", output.getvalue())
         self.assertFalse(destination.exists())
 
+    def test_cli_without_command_prints_help(self):
+        output = io.StringIO()
+
+        with contextlib.redirect_stdout(output):
+            self.assertEqual(app.main([]), 0)
+
+        self.assertIn("usage: ", output.getvalue())
+        self.assertIn("organize", output.getvalue())
+
 
 if __name__ == "__main__":
     unittest.main()

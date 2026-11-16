@@ -190,7 +190,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         description="Preview or perform common file automation tasks."
     )
-    commands = parser.add_subparsers(dest="command", required=True)
+    commands = parser.add_subparsers(dest="command")
 
     list_parser = commands.add_parser("list", help="list a folder's contents")
     list_parser.add_argument("folder", type=Path)
@@ -236,6 +236,10 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: Sequence[str] | None = None) -> int:
     parser = build_parser()
     args = parser.parse_args(argv)
+    if args.command is None:
+        parser.print_help()
+        return 0
+
     dry_run = not getattr(args, "apply", False)
 
     try:
