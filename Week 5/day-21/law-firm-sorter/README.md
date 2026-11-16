@@ -26,6 +26,23 @@ This tool automatically categorizes these documents into dedicated subfolders an
 - **Log and Subdirectory Protection**: Automatically avoids moving the active `sort_log.txt` or previously sorted category subdirectories.
 - **Built-in Dummy Generator**: Quickly generate 14 realistic sample client files for testing.
 
+## How to Use It
+
+1. Create an intake folder on the computer running this app, then copy or drag the documents you want to sort into it. This is a local command-line tool; it does not have a website for uploading folders.
+2. Open a terminal in this project folder and preview the sorting. Replace the example path with your intake folder:
+
+   ```powershell
+   python app.py sort "C:\Users\YourName\Documents\client_intake"
+   ```
+
+3. If the preview looks right, add `--apply` to move the files:
+
+   ```powershell
+   python app.py sort "C:\Users\YourName\Documents\client_intake" --apply
+   ```
+
+The app groups files by extension, creates category folders inside the intake folder, and writes a `sort_log.txt` audit log there. It sorts files directly inside the intake folder, not files in nested folders.
+
 ## CLI Usage
 
 ### 1. Preview Sorting (Dry-Run Mode)
