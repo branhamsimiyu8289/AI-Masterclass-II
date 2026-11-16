@@ -3,3 +3,6 @@
 !.env.example
 Week4/day-18/full-stack/instance/
 Week3/day-13/chat_log.json
+__pycache__/
+*.py[cod]
+
