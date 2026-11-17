@@ -114,10 +114,10 @@ The [day-22 web-scraper](./Week5/day-22/web-scraper/README.md) scrapes book titl
 prices, and ratings from Books to Scrape using requests and BeautifulSoup, featuring
 retries with backoff and CSV export.
 
-The [day-22 job-market-tracker](./Week5/day-22/job-market-tracker/README.md) crawls
-market listings from a sandbox target to extract roles, hiring organizations, in-demand
-skills, and listing links for HR competitor intelligence, accompanied by live-site adaptation
-guidance, KDPA compliance notes, and a weekly client pricing model.
+The [day-22 job-market-tracker](./Week5/day-22/job-market-tracker/README.md) is a
+safe prototype using `quotes.toscrape.com` to map quote text, authors, and tags to
+example HR market-intelligence fields. Its README covers adapting the approach for
+an authorized jobs board, KDPA considerations, and a weekly client pricing model.
 
 ## Repository structure
 
