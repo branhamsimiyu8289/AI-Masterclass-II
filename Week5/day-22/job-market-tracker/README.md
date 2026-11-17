@@ -145,3 +145,9 @@ For an HR consultancy or corporate talent acquisition team in Nairobi requiring 
 
 ### Return on Investment (ROI)
 A mid-level HR analyst earning KSh 80,000/month spends approximately 16 hours per month manually browsing competitor job sites (~KSh 16,000 in direct labor cost), often with inconsistent coverage and transcription errors. At **KSh 30,000/month**, the consultancy receives 100% comprehensive, structured, error-free competitor intelligence delivered on schedule, freeing HR staff to focus on strategic talent acquisition.
+
+---
+
+## Author
+
+**Branham Simiyu**
