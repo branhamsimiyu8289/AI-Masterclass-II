@@ -114,6 +114,11 @@ The [day-22 web-scraper](./Week5/day-22/web-scraper/README.md) scrapes book titl
 prices, and ratings from Books to Scrape using requests and BeautifulSoup, featuring
 retries with backoff and CSV export.
 
+The [day-22 job-market-tracker](./Week5/day-22/job-market-tracker/README.md) crawls
+market listings from a sandbox target to extract roles, hiring organizations, in-demand
+skills, and listing links for HR competitor intelligence, accompanied by live-site adaptation
+guidance, KDPA compliance notes, and a weekly client pricing model.
+
 ## Repository structure
 
 ```text
@@ -158,6 +163,7 @@ AI-Masterclass-II/
     │   ├── file-automation/        # Safe file automation CLI
     │   └── law-firm-sorter/        # Extension-based legal document sorter
     └── day-22/
+        ├── job-market-tracker/     # Competitor job market & skills tracking pipeline
         └── web-scraper/            # Books to Scrape web scraper and CSV exporter
 ```
 
