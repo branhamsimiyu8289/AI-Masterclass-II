@@ -100,7 +100,7 @@ Try the [live demo](https://nairobi-complaint-reply-tool.onrender.com/) or see i
 [project README](./Week4/day-20/README.md) for features, setup, and commercial
 client pricing strategy.
 
-### Week 5: file automation
+### Week 5: file automation and web scraping
 
 The [day-21 file-automation CLI](./Week5/day-21/file-automation/app.py) demonstrates
 safe, preview-first file tasks, including organizing files, spreadsheet backups,
@@ -109,6 +109,10 @@ and photo renaming. Run `python app.py --help` from its folder to see the comman
 The [day-21 law-firm sorter](./Week5/day-21/law-firm-sorter/README.md) groups
 documents by file extension, previews moves before applying them, and records
 completed moves in an audit log. Its README explains local-folder usage and setup.
+
+The [day-22 web-scraper](./Week5/day-22/web-scraper/README.md) scrapes book titles,
+prices, and ratings from Books to Scrape using requests and BeautifulSoup, featuring
+retries with backoff and CSV export.
 
 ## Repository structure
 
@@ -150,9 +154,11 @@ AI-Masterclass-II/
 │       ├── requirements.txt        # Python package dependencies
 │       └── README.md               # Tool overview & Kenyan SME client pricing strategy
 └── Week5/
-    └── day-21/
-        ├── file-automation/        # Safe file automation CLI
-        └── law-firm-sorter/        # Extension-based legal document sorter
+    ├── day-21/
+    │   ├── file-automation/        # Safe file automation CLI
+    │   └── law-firm-sorter/        # Extension-based legal document sorter
+    └── day-22/
+        └── web-scraper/            # Books to Scrape web scraper and CSV exporter
 ```
 
 ## Getting started
