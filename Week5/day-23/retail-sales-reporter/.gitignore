@@ -1,0 +1,13 @@
+# Environment variables & secrets (CRITICAL: Never commit to git)
+.env
+.env.*
+!.env.example
+
+# Python runtime artifacts
+__pycache__/
+*.py[cod]
+*$py.class
+*.log
+
+# Generated test & preview reports
+last_report.html

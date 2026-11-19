@@ -1,0 +1,17 @@
+transaction_id,timestamp,item_name,category,quantity_sold,unit_price,payment_method,stock_remaining,restock_threshold
+TXN-20261119-001,2026-11-19 08:15:20,Brookside Fresh Milk 500ml,Dairy,4,65.00,M-Pesa,18,12
+TXN-20261119-002,2026-11-19 08:42:10,Broadways Sliced White Bread 400g,Bakery,6,65.00,Cash,3,10
+TXN-20261119-003,2026-11-19 09:10:05,Pembe Maize Flour 2kg,Staples,3,215.00,M-Pesa,8,15
+TXN-20261119-004,2026-11-19 09:55:40,Kabras Pure White Sugar 1kg,Staples,2,160.00,Cash,6,12
+TXN-20261119-005,2026-11-19 10:30:15,Golden Fry Vegetable Cooking Oil 1L,Cooking Oils,1,320.00,M-Pesa,14,8
+TXN-20261119-006,2026-11-19 11:12:50,Menengai Cream Bar Soap 1kg,Household,2,240.00,Cash,22,10
+TXN-20261119-007,2026-11-19 11:45:00,Royco Mchuzi Mix Beef 200g,Seasoning,3,140.00,M-Pesa,16,8
+TXN-20261119-008,2026-11-19 12:20:30,Ketepa Pride Tea Leaves 250g,Beverages,1,135.00,Cash,11,10
+TXN-20261119-009,2026-11-19 13:05:15,Daima Strawberry Yoghurt 250ml,Dairy,5,95.00,M-Pesa,2,8
+TXN-20261119-010,2026-11-19 13:40:22,Indomie Instant Noodles Chicken 120g,Quick Meals,8,50.00,Cash,45,20
+TXN-20261119-011,2026-11-19 14:15:10,Geisha Bathing Soap 225g,Personal Care,2,110.00,Cash,19,10
+TXN-20261119-012,2026-11-19 15:02:45,Tuzo Long Life Milk 500ml,Dairy,4,70.00,M-Pesa,25,10
+TXN-20261119-013,2026-11-19 15:35:10,Brookside Fresh Milk 500ml,Dairy,5,65.00,M-Pesa,13,12
+TXN-20261119-014,2026-11-19 16:10:00,Pembe Maize Flour 2kg,Staples,4,215.00,M-Pesa,4,15
+TXN-20261119-015,2026-11-19 16:50:35,Mumias White Sugar 2kg,Staples,2,310.00,Cash,15,8
+TXN-20261119-016,2026-11-19 17:35:12,Omo Hand Washing Powder 500g,Household,2,220.00,M-Pesa,5,10
