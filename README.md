@@ -119,6 +119,11 @@ safe prototype using `quotes.toscrape.com` to map quote text, authors, and tags 
 example HR market-intelligence fields. Its README covers adapting the approach for
 an authorized jobs board, KDPA considerations, and a weekly client pricing model.
 
+The [day-23 retail sales reporter](./Week5/day-23/retail-sales-reporter/README.md)
+reads point-of-sale CSV data, calculates daily sales metrics, flags low stock, and
+can send an HTML report by email or generate a local preview. See its README for
+dependency installation, `.env` setup, dry-run, scheduling, and tests.
+
 ## Repository structure
 
 ```text
@@ -162,9 +167,12 @@ AI-Masterclass-II/
     ├── day-21/
     │   ├── file-automation/        # Safe file automation CLI
     │   └── law-firm-sorter/        # Extension-based legal document sorter
-    └── day-22/
-        ├── job-market-tracker/     # Competitor job market & skills tracking pipeline
-        └── web-scraper/            # Books to Scrape web scraper and CSV exporter
+    ├── day-22/
+    │   ├── job-market-tracker/     # Competitor job market & skills tracking pipeline
+    │   └── web-scraper/            # Books to Scrape web scraper and CSV exporter
+    └── day-23/
+        ├── email-automation/       # SMTP email and scheduled report examples
+        └── retail-sales-reporter/  # Daily sales metrics and low-stock email report
 ```
 
 ## Getting started
