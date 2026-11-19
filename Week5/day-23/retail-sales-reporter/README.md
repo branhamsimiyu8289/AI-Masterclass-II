@@ -69,8 +69,6 @@ The system calculates and highlights four primary indicators required by retail 
 
 ---
 
-## 4. Realistic Sample Dataset
-
 The included `sales_data.csv` represents a realistic day of trading at **Zawadi Mini-Mart & Provisions** along Ngong Road, Nairobi:
 
 ```csv
