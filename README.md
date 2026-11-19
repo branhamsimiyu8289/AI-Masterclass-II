@@ -124,6 +124,10 @@ reads point-of-sale CSV data, calculates daily sales metrics, flags low stock, a
 can send an HTML report by email or generate a local preview. See its README for
 dependency installation, `.env` setup, dry-run, scheduling, and tests.
 
+The [day-24 automation tool](./Week5/day-24/automation-tool/README.md) schedules
+the retail sales reporter to run daily through Windows Task Scheduler or Unix
+cron. It includes setup and maintenance utilities, audit logging, and tests.
+
 ## Repository structure
 
 ```text
@@ -170,9 +174,11 @@ AI-Masterclass-II/
     ├── day-22/
     │   ├── job-market-tracker/     # Competitor job market & skills tracking pipeline
     │   └── web-scraper/            # Books to Scrape web scraper and CSV exporter
-    └── day-23/
-        ├── email-automation/       # SMTP email and scheduled report examples
-        └── retail-sales-reporter/  # Daily sales metrics and low-stock email report
+    ├── day-23/
+    │   ├── email-automation/       # SMTP email and scheduled report examples
+    │   └── retail-sales-reporter/  # Daily sales metrics and low-stock email report
+    └── day-24/
+        └── automation-tool/        # Scheduled retail reporter and audit logging
 ```
 
 ## Getting started
