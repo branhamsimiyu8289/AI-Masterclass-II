@@ -1,0 +1,9 @@
+Invoice Number,Client Name,Client Email,Service Description,Invoice Amount,Due Date,Paid (Yes/No)
+"INV-1001","Amani Creative Media","accounts@amanimedia.co.ke","Brand Identity & Web Redesign",45000,"2026-11-09","No"
+"INV-1002","Baraka Logistics Ltd","finance@barakalogistics.com","Fleet GPS Tracking Integration",18500,"2026-11-18","No"
+"INV-1003","Nairobi Tech Hub","admin@nairobitechhub.org","Cloud Server Optimization",65000,"2026-11-28","No"
+"INV-1004","Safari Haven Tours","billing@safarihaven.co.ke","Booking Portal Maintenance",92000,"2026-10-17","No"
+"INV-1005","Kilifi Coconut Ventures","info@kilificoconut.co.ke","E-Commerce Checkout Setup",14000,"2026-11-05","Yes"
+"INV-1006","Zawadi Retail Grocers","zawadiretail@gmail.com","POS Inventory Script Deployment",28000,"2026-11-12","No"
+"INV-1007","Mama Mboga Fresh Supply","orders@mamamboga.co.ke","WhatsApp Ordering Bot Setup",12500,"2026-11-20","Yes"
+"INV-1008","Eldoret Grain Millers","accounts@eldoretgrain.co.ke","Automated PDF Report Generator",35000,"2026-12-05","No"

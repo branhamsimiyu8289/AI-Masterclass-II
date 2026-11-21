@@ -128,6 +128,11 @@ The [day-24 automation tool](./Week5/day-24/automation-tool/README.md) schedules
 the retail sales reporter to run daily through Windows Task Scheduler or Unix
 cron. It includes setup and maintenance utilities, audit logging, and tests.
 
+The [day-25 invoice reminder](./Week5/day-25/invoice-reminder/README.md)
+scans an Excel or CSV invoice register for overdue unpaid records, drafts
+polite, tiered follow-up emails with Kenyan payment details (M-Pesa and bank transfer),
+and outputs ready-to-dispatch `.txt` files into an `Outbox/` directory.
+
 ## Repository structure
 
 ```text
@@ -177,8 +182,10 @@ AI-Masterclass-II/
     ├── day-23/
     │   ├── email-automation/       # SMTP email and scheduled report examples
     │   └── retail-sales-reporter/  # Daily sales metrics and low-stock email report
-    └── day-24/
-        └── automation-tool/        # Scheduled retail reporter and audit logging
+    ├── day-24/
+    │   └── automation-tool/        # Scheduled retail reporter and audit logging
+    └── day-25/
+        └── invoice-reminder/       # Automated invoice reminder and outbox drafter
 ```
 
 ## Getting started
