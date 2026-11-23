@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://branhamsimiyu8289.github.io/sitemap.xml

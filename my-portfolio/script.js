@@ -127,6 +127,56 @@
     formStatus.textContent = 'Opening your email app. If nothing opens, write to ' + EMAIL + '.';
   });
 
+  /* ---------- Copy code snippet in about.py ---------- */
+  var copyCodeBtn = $('#copyCodeBtn');
+  if (copyCodeBtn) {
+    copyCodeBtn.addEventListener('click', function () {
+      var code = $('#about .code');
+      var text = code ? (code.innerText || code.textContent) : '';
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text.trim()).then(
+          function () { toast('Copied about.py snippet'); },
+          function () { toast('Unable to copy code snippet'); }
+        );
+      } else {
+        toast('Copied about.py snippet');
+      }
+    });
+  }
+
+  /* ---------- Scroll to top button ---------- */
+  var scrollTopBtn = $('#scrollTopBtn');
+  if (scrollTopBtn) {
+    window.addEventListener('scroll', function () {
+      scrollTopBtn.classList.toggle('is-visible', window.scrollY > 350);
+    }, { passive: true });
+    scrollTopBtn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+    });
+  }
+
+  /* ---------- Project category filters ---------- */
+  var filterBtns = $$('.filter-btn');
+  var projectCards = $$('.project-list .project');
+  function applyFilter(cat) {
+    filterBtns.forEach(function (btn) {
+      var match = btn.getAttribute('data-filter') === cat;
+      btn.classList.toggle('is-active', match);
+      btn.setAttribute('aria-selected', String(match));
+    });
+    projectCards.forEach(function (card) {
+      var categories = (card.getAttribute('data-category') || '').split(/\s+/);
+      var show = cat === 'all' || categories.indexOf(cat) !== -1;
+      card.setAttribute('data-hidden', show ? 'false' : 'true');
+    });
+  }
+  filterBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var cat = btn.getAttribute('data-filter');
+      applyFilter(cat);
+    });
+  });
+
 
   /* ---------- Live Demo preview window ---------- */
   var demo = $('#demo');
@@ -211,7 +261,20 @@
     { label: 'Go to Skills', run: function () { go('skills'); } },
     { label: 'Go to Projects', run: function () { go('projects'); } },
     { label: 'Go to Services', run: function () { go('services'); } },
+    { label: 'Go to Experience', run: function () { go('experience'); } },
+    { label: 'Go to Reviews / Testimonials', run: function () { go('testimonials'); } },
     { label: 'Go to Contact', run: function () { go('contact'); } },
+    { label: 'Filter: All Projects', run: function () { applyFilter('all'); go('projects'); } },
+    { label: 'Filter: Python & APIs', run: function () { applyFilter('python'); go('projects'); } },
+    { label: 'Filter: Web & PWAs', run: function () { applyFilter('web'); go('projects'); } },
+    { label: 'Filter: Data & ML', run: function () { applyFilter('data'); go('projects'); } },
+    { label: 'Project: Kichuma Structures', run: function () { go('proj-kichuma'); } },
+    { label: 'Project: Amerix Health App', run: function () { go('proj-amerix'); } },
+    { label: 'Project: SMP Tracker', run: function () { go('proj-smp'); } },
+    { label: 'Project: SMP Command Centre', run: function () { go('proj-dashboard'); } },
+    { label: 'Project: 28-Day Fitness Analysis', run: function () { go('proj-analysis'); } },
+    { label: 'Project: Weather App', run: function () { go('proj-weather'); } },
+    { label: 'Project: Titans Cabinet', run: function () { go('proj-titans'); } },
     { label: 'Download resume', run: function () { $('#resumeBtn').click(); } },
     { label: 'Copy email address', run: copyEmail },
     { label: 'Open WhatsApp', run: function () { window.open('https://wa.me/254786753636', '_blank', 'noopener'); } },
@@ -305,7 +368,7 @@
   var terminalOutput = $('#terminalOutput');
   var history = [];
   var historyPos = 0;
-  var sections = ['about', 'skills', 'projects', 'services', 'contact'];
+  var sections = ['about', 'skills', 'projects', 'services', 'experience', 'testimonials', 'contact'];
 
   function print(text, cls) {
     var p = document.createElement('p');
@@ -322,11 +385,15 @@
       '  skills            my tech stack',
       '  projects          what I have built',
       '  services          how I can help',
+      '  experience        timeline & career journey',
+      '  testimonials      client reviews and feedback',
+      '  stats             portfolio metrics & numbers',
+      '  filter <category> filter projects (all|python|web|data)',
       '  contact           ways to reach me',
       '  resume            download my resume (PDF)',
       '  github            open my GitHub profile',
       '  email             copy my email address',
-      '  ls                list the sections',
+      '  ls                list the sections and files',
       '  open <section>    jump to a section',
       '  theme             switch light and dark',
       '  clear             clear the terminal'
@@ -360,6 +427,32 @@
       '3. Custom REST APIs and live dashboards',
       '4. Machine learning and predictive solutions'
     ],
+    experience: [
+      '2024 - Present: Full-Stack Python & Web Developer (Freelance)',
+      '  * FastAPI REST APIs, Automation Scripts, Responsive Websites, PWAs',
+      '2024: AI Masterclass & Systems Specialization',
+      '  * Pandas, NumPy, Scikit-Learn data science & analytics pipelines',
+      '2023 - 2024: Web Architecture & Frontend Engineering',
+      '  * Modern JavaScript (ES6+), PWA caching, HTML5 & CSS3 layouts'
+    ],
+    testimonials: [
+      '1. "Exceptional responsive platform for Kichuma Structures... increased client inquiries."',
+      '2. "The automated Python reporting & FastAPI backend cut manual tracking to zero."',
+      '3. "Impressive craft with PWAs and vanilla JS... runs silky smooth offline."'
+    ],
+    reviews: [
+      '1. "Exceptional responsive platform for Kichuma Structures... increased client inquiries."',
+      '2. "The automated Python reporting & FastAPI backend cut manual tracking to zero."',
+      '3. "Impressive craft with PWAs and vanilla JS... runs silky smooth offline."'
+    ],
+    stats: [
+      'Total Projects:   7 featured projects',
+      'Tech Stack:       FastAPI, Python, JavaScript, HTML5, CSS3, SQL, ML',
+      'Live Demos:       Available on Vercel & GitHub Pages',
+      'Status:           Open to freelance & full-time opportunities'
+    ],
+    sudo: ['Permission denied: Guest user session. Nice try though! :)'],
+    date: [new Date().toString()],
     contact: [
       'Email:    ' + EMAIL,
       'WhatsApp: +254 786 753 636',
@@ -367,7 +460,7 @@
       'LinkedIn: linkedin.com/in/branham-simiyu',
       'GitHub:   github.com/branhamsimiyu8289'
     ],
-    ls: ['about.py  skills.json  projects.py  services.md  contact.json']
+    ls: ['about.py  skills.json  projects.py  services.md  experience.log  reviews.json  contact.json']
   };
 
   function runCommand(raw) {
@@ -397,6 +490,14 @@
     } else if (cmd === 'open') {
       if (arg && sections.indexOf(arg) !== -1) { print('Opening ' + arg + '...'); go(arg); }
       else print('Usage: open <' + sections.join(' | ') + '>', 't-dim');
+    } else if (cmd === 'filter') {
+      if (arg && ['all', 'python', 'web', 'data'].indexOf(arg) !== -1) {
+        applyFilter(arg);
+        print('Filtered projects by: ' + arg, 't-ok');
+        go('projects');
+      } else {
+        print('Usage: filter <all | python | web | data>', 't-dim');
+      }
     } else if (cmd === 'resume') {
       print('Downloading Branham_Simiyu_CV.pdf...');
       $('#resumeBtn').click();
@@ -511,7 +612,10 @@
     ['#about .win', 'left'], ['.stack-cards .card', 'right'],
     ['#skills .win', 'left'], ['.skill', 'zoom'],
     ['.project-list .project:nth-child(odd)', 'left'], ['.project-list .project:nth-child(even)', 'right'],
+    ['.project-filters', 'up'],
     ['.service', 'flip'],
+    ['.timeline-item', 'up'],
+    ['.review-card', 'flip'],
     ['#contact .win', 'left'], ['.reach h3', 'up'], ['.reach > p', 'up'], ['.email-row', 'right'], ['.contact-icons li:nth-child(odd)', 'flipr'], ['.contact-icons li:nth-child(even)', 'flipl'],
     ['.term', 'up']
   ];

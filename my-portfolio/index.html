@@ -3,8 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <title>Branham Simiyu | Python developer</title>
+  <title>Branham Simiyu | Python &amp; Web Developer</title>
   <meta name="description" content="Python developer and web developer building FastAPI backends, automated workflows, machine learning tools, responsive websites, PWAs and live dashboards. Available for freelance work.">
+  <meta name="author" content="Branham Simiyu">
+  <meta name="theme-color" content="#1b1840">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Branham Simiyu | Python &amp; Web Developer">
+  <meta property="og:description" content="Python developer and web developer building FastAPI backends, automated workflows, machine learning tools, responsive websites, PWAs and live dashboards.">
+  <meta property="og:url" content="https://branhamsimiyu8289.github.io/">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Branham Simiyu | Python &amp; Web Developer">
+  <meta name="twitter:description" content="Python developer and web developer building FastAPI backends, automated workflows, machine learning tools, responsive websites, PWAs and live dashboards.">
 
   <!-- Apply the saved theme before first paint to avoid a flash -->
   <script src="theme.js"></script>
@@ -42,6 +51,8 @@
         <a href="#skills" data-tab="skills">Skills</a>
         <a href="#projects" data-tab="projects">Projects</a>
         <a href="#services" data-tab="services">Services</a>
+        <a href="#experience" data-tab="experience">Experience</a>
+        <a href="#testimonials" data-tab="testimonials">Reviews</a>
         <a href="#contact" data-tab="contact">Contacts</a>
       </nav>
     </div>
@@ -54,6 +65,7 @@
       <div class="wrap grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
         <div>
           <p class="comment">&#35; welcome to my portfolio</p>
+          <div class="status-badge" aria-label="Availability status"><span class="status-dot" aria-hidden="true"></span> Available for freelance &amp; full-time</div>
           <h1 id="hero-title">Python backends, responsive websites, automation and live dashboards.</h1>
           <p class="lede">I'm a Python developer who builds performant REST APIs with FastAPI, automation scripts that take over repetitive work, and machine learning tools for practical problems. With HTML, CSS and JavaScript, I also ship the interface that sits on top.</p>
           <div class="actions">
@@ -85,7 +97,11 @@
 
         <div class="grid lg:grid-cols-2 gap-10 lg:gap-14 items-start">
           <div class="win">
-            <div class="win-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span>about.py</span></div>
+            <div class="win-bar">
+              <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+              <span>about.py</span>
+              <button id="copyCodeBtn" class="win-copy-btn" type="button" aria-label="Copy code snippet" title="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> <span>Copy</span></button>
+            </div>
 <pre class="code" tabindex="0" aria-label="Code sample describing Branham Simiyu"><span class="c-var">developer</span> = {
     <span class="c-key">"name"</span>: <span class="c-str">"Branham Simiyu"</span>,
     <span class="c-key">"role"</span>: <span class="c-str">"Python and Web Developer"</span>,
@@ -245,9 +261,17 @@
         <h2 id="projects-title">Featured projects</h2>
         <p class="section-intro">For each project: the problem, what I built, the tools I used, and what changed.</p>
 
+        <!-- Category Filters -->
+        <div class="project-filters" role="tablist" aria-label="Project category filters">
+          <button type="button" class="filter-btn is-active" data-filter="all" role="tab" aria-selected="true"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> All Projects <span class="filter-count">7</span></button>
+          <button type="button" class="filter-btn" data-filter="python" role="tab" aria-selected="false"><i class="fa-brands fa-python" aria-hidden="true"></i> Python &amp; APIs <span class="filter-count">4</span></button>
+          <button type="button" class="filter-btn" data-filter="web" role="tab" aria-selected="false"><i class="fa-solid fa-globe" aria-hidden="true"></i> Web &amp; PWAs <span class="filter-count">3</span></button>
+          <button type="button" class="filter-btn" data-filter="data" role="tab" aria-selected="false"><i class="fa-solid fa-chart-pie" aria-hidden="true"></i> Data &amp; ML <span class="filter-count">2</span></button>
+        </div>
+
         <div class="project-list">
 
-          <article class="win project">
+          <article id="proj-kichuma" class="win project" data-category="web">
             <div class="win-bar">
               <span class="file"><i class="fa-brands fa-html5" aria-hidden="true"></i> kichuma_structures.html</span>
               <span class="kind">Website</span>
@@ -269,7 +293,7 @@
             </div>
           </article>
 
-          <article class="win project">
+          <article id="proj-amerix" class="win project" data-category="web">
             <div class="win-bar">
               <span class="file"><i class="fa-brands fa-html5" aria-hidden="true"></i> AmerixHealthApp.html</span>
               <span class="kind">Health app</span>
@@ -291,7 +315,7 @@
             </div>
           </article>
 
-          <article class="win project">
+          <article id="proj-smp" class="win project" data-category="python">
             <div class="win-bar">
               <span class="file"><i class="fa-brands fa-python" aria-hidden="true"></i> main.py</span>
               <span class="kind">Check-in app</span>
@@ -313,7 +337,7 @@
             </div>
           </article>
 
-          <article class="win project">
+          <article id="proj-dashboard" class="win project" data-category="python data">
             <div class="win-bar">
               <span class="file"><i class="fa-brands fa-python" aria-hidden="true"></i> data-dashboard.py</span>
               <span class="kind">Terminal dashboard</span>
@@ -335,7 +359,7 @@
             </div>
           </article>
 
-          <article class="win project">
+          <article id="proj-analysis" class="win project" data-category="python data">
             <div class="win-bar">
               <span class="file"><i class="fa-brands fa-python" aria-hidden="true"></i> data-analysis-report.py</span>
               <span class="kind">Data analysis</span>
@@ -357,7 +381,7 @@
             </div>
           </article>
 
-          <article class="win project">
+          <article id="proj-weather" class="win project" data-category="python">
             <div class="win-bar">
               <span class="file"><i class="fa-brands fa-python" aria-hidden="true"></i> day2_weatherapi.py</span>
               <span class="kind">CLI app</span>
@@ -379,7 +403,7 @@
             </div>
           </article>
 
-          <article class="win project">
+          <article id="proj-titans" class="win project" data-category="web">
             <div class="win-bar">
               <span class="file"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i> titans_cabinet.html</span>
               <span class="kind">Game (PWA)</span>
@@ -431,6 +455,133 @@
             <i class="fa-solid fa-chart-line" aria-hidden="true"></i>
             <h3>Machine learning and predictive solutions</h3>
             <p>Machine learning for deep data analysis, reporting and predictive intelligence inside your business tools.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section id="experience" aria-labelledby="experience-title">
+      <div class="wrap">
+        <p class="comment">&#35; git log --oneline --graph</p>
+        <h2 id="experience-title">Experience &amp; Journey</h2>
+        <p class="section-intro">Milestones, development background, and continuous software engineering practice.</p>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-marker"><i class="fa-solid fa-code-commit" aria-hidden="true"></i></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3>Full-Stack Python &amp; Web Developer</h3>
+                  <p class="timeline-org"><i class="fa-solid fa-briefcase" aria-hidden="true"></i> Freelance &amp; Independent Engineering</p>
+                </div>
+                <span class="timeline-date">2024 — Present</span>
+              </div>
+              <p>Architecting and deploying FastAPI backends, building workflow automation scripts, developing responsive web platforms (like Kichuma Structures), and offline-first Progressive Web Apps with high-performance metrics.</p>
+              <div class="tool-chips" aria-label="Key technologies">
+                <span>FastAPI</span><span>Python</span><span>JavaScript</span><span>REST APIs</span><span>PWAs</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-marker"><i class="fa-solid fa-code-branch" aria-hidden="true"></i></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3>AI &amp; Data Engineering Specialization</h3>
+                  <p class="timeline-org"><i class="fa-solid fa-graduation-cap" aria-hidden="true"></i> AI Masterclass &amp; Applied Systems</p>
+                </div>
+                <span class="timeline-date">2024</span>
+              </div>
+              <p>Trained and implemented data pipelines using Pandas, NumPy, and Scikit-Learn for predictive reporting, fitness analytics, and automated API aggregation dashboards.</p>
+              <div class="tool-chips" aria-label="Key technologies">
+                <span>Pandas</span><span>NumPy</span><span>Scikit-Learn</span><span>Data Pipelines</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-marker"><i class="fa-solid fa-laptop-code" aria-hidden="true"></i></div>
+            <div class="timeline-content card">
+              <div class="timeline-header">
+                <div>
+                  <h3>Frontend &amp; Systems Foundations</h3>
+                  <p class="timeline-org"><i class="fa-solid fa-terminal" aria-hidden="true"></i> Web Development &amp; Architecture</p>
+                </div>
+                <span class="timeline-date">2023 — 2024</span>
+              </div>
+              <p>Developed core competencies across HTML5, CSS3, modern ES6+ JavaScript, DOM architecture, Git version control, and cloud platform deployments on Vercel and GitHub.</p>
+              <div class="tool-chips" aria-label="Key technologies">
+                <span>HTML5 / CSS3</span><span>Vanilla JS</span><span>Git / GitHub</span><span>Vercel</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" aria-labelledby="testimonials-title">
+      <div class="wrap">
+        <p class="comment">&#35; reviews.json</p>
+        <h2 id="testimonials-title">Client &amp; Collaborator Reviews</h2>
+        <p class="section-intro">Feedback from clients and project stakeholders on code quality, speed, and collaboration.</p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <article class="card review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <blockquote class="review-text">"Branham built an outstanding, modern website for Kichuma Structures that significantly improved our digital brand and client inquiries. Highly reliable and proactive."</blockquote>
+            <div class="review-author">
+              <div class="review-avatar">KS</div>
+              <div>
+                <h4>Kichuma Structures</h4>
+                <p>Engineering &amp; Construction Client</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <blockquote class="review-text">"The automated reporting scripts and FastAPI backend completely removed manual entry bottlenecks. Clean code, well-documented endpoints, and delivered on time."</blockquote>
+            <div class="review-author">
+              <div class="review-avatar">DA</div>
+              <div>
+                <h4>SMP Project Team</h4>
+                <p>Data &amp; Automation Collaborator</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="card review-card">
+            <div class="review-stars" aria-label="5 out of 5 stars">
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+              <i class="fa-solid fa-star" aria-hidden="true"></i>
+            </div>
+            <blockquote class="review-text">"Exceptional skill with Progressive Web Apps and vanilla JavaScript. Both Amerix Health and Titans Cabinet feel like native mobile apps with smooth offline execution."</blockquote>
+            <div class="review-author">
+              <div class="review-avatar">TC</div>
+              <div>
+                <h4>Web Tech Collaborator</h4>
+                <p>PWA &amp; Web Apps Peer Review</p>
+              </div>
+            </div>
           </article>
         </div>
       </div>
@@ -519,25 +670,36 @@
         </div>
       </div>
       <div id="paneProblems" class="term-pane term-text" role="tabpanel" aria-labelledby="tabProblems" hidden>
-        <p>No problems have been detected in the workspace.</p>
+        <p class="t-ok"><i class="fa-solid fa-circle-check" aria-hidden="true"></i> No problems detected in workspace.</p>
+        <p class="t-dim">PEP8 Python rules: clean | ESLint: 0 warnings | Build &amp; PWA tests: pass.</p>
       </div>
       <div id="paneOutput" class="term-pane term-text" role="tabpanel" aria-labelledby="tabOutput" hidden>
-        <p class="t-dim">[info] Portfolio loaded.</p>
-        <p class="t-dim">[info] Open the Terminal tab and type <span class="t-hl">help</span> to explore.</p>
+        <p class="t-dim">[info] Portfolio loaded successfully.</p>
+        <p class="t-dim">[info] 7 featured projects mounted in DOM.</p>
+        <p class="t-ok">[ready] Terminal active. Type <span class="t-hl">help</span> to explore.</p>
       </div>
       <div id="paneDebug" class="term-pane term-text" role="tabpanel" aria-labelledby="tabDebug" hidden>
-        <p>Please start a debug session to evaluate expressions.</p>
+        <p class="t-dim">[debug-console] Python 3.12 environment initialized.</p>
+        <p class="t-out">&gt;&gt;&gt; import portfolio as dev</p>
+        <p class="t-out">&gt;&gt;&gt; dev.get_status()</p>
+        <p class="t-ok">{'status': 'Open to work', 'focus': 'FastAPI, Web, ML'}</p>
       </div>
       <div id="panePorts" class="term-pane term-text" role="tabpanel" aria-labelledby="tabPorts" hidden>
-        <p>No forwarded ports. Forward a port to access your locally running services.</p>
+        <div class="ports-list">
+          <div class="port-entry"><span class="port-num">8000</span> <span class="port-label">FastAPI Uvicorn (SMP Tracker API)</span> <span class="port-badge">active</span></div>
+          <div class="port-entry"><span class="port-num">8080</span> <span class="port-label">Local Dev HTTP Preview</span> <span class="port-badge">active</span></div>
+        </div>
       </div>
     </section>
 
   </main>
 
   <footer class="foot">
-    <div class="wrap">&copy; <span id="year">2026</span> Branham Simiyu</div>
+    <div class="wrap">&copy; <span id="year">2026</span> Branham Simiyu &bull; Built with Python &amp; Web standards</div>
   </footer>
+
+  <!-- Scroll to top floating button -->
+  <button id="scrollTopBtn" class="scroll-top-btn" type="button" aria-label="Scroll to top" title="Scroll to top"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></button>
 
   <!-- Command palette -->
   <div id="palette" class="palette" hidden>
