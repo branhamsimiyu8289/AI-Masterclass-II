@@ -40,7 +40,7 @@ A Python CLI script (`pdf_qa.py`) that extracts text from any user-provided PDF 
 
 ## How to Run
 
-From `Week6\day-26`:
+From `Week6\day-26\pdf-Q&A`:
 
 - **Interactive mode (prompts for PDF path, then lets you ask multiple questions):**
 
