@@ -133,6 +133,14 @@ scans an Excel or CSV invoice register for overdue unpaid records, drafts
 polite, tiered follow-up emails with Kenyan payment details (M-Pesa and bank transfer),
 and outputs ready-to-dispatch `.txt` files into an `Outbox/` directory.
 
+### Week 6: document processing
+
+The [day-26 document handler](./Week6/day-26/document-handler/README.md)
+extracts PDF text, analyzes contract details with Gemini, creates Word reports,
+and indexes invoice PDFs. The separate [PDF Q&A assistant](./Week6/day-26/pdf-Q&A/README.md)
+answers questions about a PDF using Gemini, with page citations and support for
+scanned documents.
+
 ## Repository structure
 
 ```text
@@ -172,7 +180,7 @@ AI-Masterclass-II/
 │       ├── render.yaml             # Render blueprint configuration
 │       ├── requirements.txt        # Python package dependencies
 │       └── README.md               # Tool overview & Kenyan SME client pricing strategy
-└── Week5/
+├── Week5/
     ├── day-21/
     │   ├── file-automation/        # Safe file automation CLI
     │   └── law-firm-sorter/        # Extension-based legal document sorter
@@ -186,6 +194,10 @@ AI-Masterclass-II/
     │   └── automation-tool/        # Scheduled retail reporter and audit logging
     └── day-25/
         └── invoice-reminder/       # Automated invoice reminder and outbox drafter
+└── Week6/
+    └── day-26/
+        ├── document-handler/       # PDF processing and Word report examples
+        └── pdf-Q&A/                # Gemini-powered PDF question-answering CLI
 ```
 
 ## Getting started
