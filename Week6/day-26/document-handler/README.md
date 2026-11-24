@@ -1,11 +1,13 @@
 # Document Handler
 
-The script provides separate commands for each document task:
+Run the script to perform the document tasks in sequence:
 
-- Extract a text preview from a PDF.
-- Ask Gemini to extract key terms from a contract PDF.
-- Create an example sales report in Word format.
-- Index PDFs in a folder into a CSV file.
+- Print a text preview of `supplier_invoice.pdf`, if present.
+- Extract key contract details from `supplier_contract.pdf` using Gemini, if
+  present.
+- Create `november_report.docx`.
+- Index PDFs in the `invoices` folder into `invoice_index.csv`, if the folder is
+  present.
 
 ## Setup
 
@@ -15,25 +17,21 @@ From this directory, install the dependencies:
 python -m pip install -r requirements.txt
 ```
 
-For contract analysis, set `GEMINI_API_KEY` in your environment or create a
-`.env` file in this directory:
+If `supplier_contract.pdf` is present, set `GEMINI_API_KEY` in your environment
+or in a `.env` file in the current directory:
 
 ```env
 GEMINI_API_KEY=your_api_key_here
 ```
 
-## Usage
+## Run
 
-Run these commands from this directory:
+Place the invoice and contract PDFs, and optionally an `invoices` folder, in
+the current directory. Then run:
 
 ```powershell
-python .\document-handler.py extract .\supplier_invoice.pdf
-python .\document-handler.py analyze-contract .\supplier_contract.pdf
-python .\document-handler.py create-report --output .\november_report.docx
-python .\document-handler.py index-invoices .\invoices --output .\invoice_index.csv
+python .\document-handler.py
 ```
 
-The contract-analysis command accepts `--model` (or `GEMINI_MODEL` in `.env`) to
-select a Gemini model (defaults to `gemini-flash-lite-latest`).
-The invoice index defaults to the `invoices` folder and writes
-`invoice_index.csv` in the current directory if paths are omitted.
+Contract analysis tries the configured Gemini model list in order. The API key
+is required only when `supplier_contract.pdf` is present.

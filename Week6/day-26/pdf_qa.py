@@ -274,7 +274,7 @@ def ask_gemini(
         "contents": contents,
         "generationConfig": {
             "temperature": 0.2,
-            "maxOutputTokens": 1024,
+            "maxOutputTokens": 2048,
         },
     }
 
@@ -284,9 +284,13 @@ def ask_gemini(
 
     try:
         for model_name in model_candidates:
-            url = f"{GEMINI_API_BASE}/{model_name}:generateContent?key={api_key}"
+            url = f"{GEMINI_API_BASE}/{model_name}:generateContent"
             try:
-                response = client.post(url, json=payload)
+                response = client.post(
+                    url,
+                    headers={"x-goog-api-key": api_key},
+                    json=payload,
+                )
             except httpx.TimeoutException:
                 last_error = f"Request timed out after {int(REQUEST_TIMEOUT_SECONDS)}s"
                 continue
@@ -299,7 +303,11 @@ def ask_gemini(
                 candidates = data.get("candidates", [])
                 if candidates and "content" in candidates[0]:
                     parts = candidates[0]["content"].get("parts", [])
-                    answer_parts = [p.get("text", "") for p in parts if p.get("text")]
+                    answer_parts = [
+                        p.get("text", "")
+                        for p in parts
+                        if p.get("text") and not p.get("thought")
+                    ]
                     answer = "\n".join(answer_parts).strip()
                     if answer:
                         return answer, model_name, was_truncated
