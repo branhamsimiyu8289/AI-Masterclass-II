@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Customer Complaint Reply Drafter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #059669;
+      --primary-dark: #047857;
+      --primary-light: #ecfdf5;
+      --accent: #25D366; /* WhatsApp Green */
+      --accent-dark: #128C7E;
+      --surface: #ffffff;
+      --bg: #f8fafc;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+      flex: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    h1 {
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .app-card {
+      background-color: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .char-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    textarea.complaint-box {
+      width: 100%;
+      min-height: 160px;
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background-color: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      resize: vertical;
+      line-height: 1.5;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    textarea.complaint-box:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    textarea.complaint-box::placeholder {
+      color: #94a3b8;
+    }
+
+    .btn-generate {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
+    }
+
+    .btn-generate:hover:not(:disabled) {
+      background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(5, 150, 105, 0.3);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error-banner {
+      display: none;
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--radius-md);
+      color: #991b1b;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .result-section {
+      display: none;
+      margin-top: 2rem;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .result-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .whatsapp-preview-card {
+      background-color: #efeae2;
+      background-image: radial-gradient(#d6d0c4 1px, transparent 1px);
+      background-size: 16px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .whatsapp-bubble {
+      background-color: #ffffff;
+      border-radius: 8px;
+      border-top-left-radius: 0;
+      padding: 1rem 1.15rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+      max-width: 100%;
+      position: relative;
+    }
+
+    .whatsapp-bubble::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border-top: 0 solid transparent;
+      border-right: 8px solid #ffffff;
+      border-bottom: 8px solid transparent;
+    }
+
+    .bubble-text {
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    .bubble-meta {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+
+    .draft-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .btn-action {
+      flex: 1;
+      min-width: 170px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-copy {
+      background-color: #ffffff;
+      color: #1e293b;
+      border: 1.5px solid #cbd5e1;
+    }
+
+    .btn-copy:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .btn-copy.copied {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .btn-whatsapp {
+      background-color: var(--accent);
+      color: #ffffff;
+      border: 1.5px solid var(--accent-dark);
+    }
+
+    .btn-whatsapp:hover {
+      background-color: var(--accent-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-top: 1px solid var(--card-border);
+      background-color: #ffffff;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      h1 {
+        font-size: 1.65rem;
+      }
+      .app-card {
+        padding: 1.25rem;
+      }
+      .btn-action {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      <h1>Customer Complaint <span>Reply Drafter</span></h1>
+      <p class="subtitle">
+        Paste a customer complaint message below to instantly generate a polite, professional reply draft.
+      </p>
+    </header>
+
+    <div class="app-card">
+      <!-- Core Form: Exactly one text box, one button -->
+      <form id="replyForm" onsubmit="handleGenerate(event)">
+        <div class="form-group">
+          <div class="form-label">
+            <label for="complaintInput">Paste Customer Complaint Message</label>
+            <span class="char-count" id="charCount">0 characters</span>
+          </div>
+          <textarea 
+            id="complaintInput" 
+            class="complaint-box" 
+            placeholder="Paste the customer's WhatsApp complaint message here..."
+            required></textarea>
+        </div>
+
+        <button type="submit" class="btn-generate" id="generateBtn">
+          <span class="spinner" id="spinner"></span>
+          <span id="btnText">Generate Reply</span>
+        </button>
+      </form>
+
+      <!-- Error Alert -->
+      <div class="error-banner" id="errorBanner">
+        <span>⚠️</span>
+        <span id="errorMessage">An error occurred while generating the reply.</span>
+      </div>
+
+      <!-- Result Section (Returned on the same page) -->
+      <div class="result-section" id="resultSection">
+        <div class="result-header">
+          <div class="result-title">
+            <span>📱 Draft Response</span>
+          </div>
+        </div>
+
+        <!-- WhatsApp Preview Card -->
+        <div class="whatsapp-preview-card">
+          <div class="whatsapp-bubble">
+            <div class="bubble-text" id="draftOutput"></div>
+            <div class="bubble-meta">
+              <span id="bubbleTime">Just now</span>
+              <span style="color: #38bdf8; font-weight: bold;">✓✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="draft-actions">
+          <button type="button" class="btn-action btn-copy" id="copyBtn" onclick="copyDraft()">
+            <span id="copyIcon">📋</span>
+            <span id="copyText">Copy to Clipboard</span>
+          </button>
+          <a href="#" class="btn-action btn-whatsapp" id="whatsappLink" target="_blank" rel="noopener">
+            <span>💬</span>
+            <span>Send via WhatsApp Web</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer with copyright only -->
+  <footer>
+    <p>&copy; 2026 Branham Simiyu. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const textarea = document.getElementById('complaintInput');
+    const charCount = document.getElementById('charCount');
+    const generateBtn = document.getElementById('generateBtn');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
+    const errorBanner = document.getElementById('errorBanner');
+    const errorMessage = document.getElementById('errorMessage');
+    const resultSection = document.getElementById('resultSection');
+    const draftOutput = document.getElementById('draftOutput');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyText = document.getElementById('copyText');
+    const whatsappLink = document.getElementById('whatsappLink');
+
+    // Live character counter
+    textarea.addEventListener('input', () => {
+      charCount.textContent = `${textarea.value.length} characters`;
+    });
+
+    // Form Submission: Calls backend API using the server's Gemini API key
+    async function handleGenerate(e) {
+      e.preventDefault();
+      const text = textarea.value.trim();
+      if (!text) return;
+
+      generateBtn.disabled = true;
+      spinner.style.display = 'inline-block';
+      btnText.textContent = 'Generating Reply...';
+      errorBanner.style.display = 'none';
+
+      try {
+        const response = await fetch('/api/generate-reply', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ complaint: text })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok || !data.success) {
+          throw new Error(data.message || 'Failed to generate reply');
+        }
+
+        // Display results on the same page
+        draftOutput.textContent = data.reply;
+        
+        // Update WhatsApp web link
+        const encoded = encodeURIComponent(data.reply);
+        whatsappLink.href = `https://wa.me/?text=${encoded}`;
+
+        resultSection.style.display = 'block';
+        resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        copyBtn.classList.remove('copied');
+        copyText.textContent = 'Copy to Clipboard';
+      } catch (err) {
+        errorMessage.textContent = err.message || 'Network error. Please try again.';
+        errorBanner.style.display = 'flex';
+      } finally {
+        generateBtn.disabled = false;
+        spinner.style.display = 'none';
+        btnText.textContent = 'Generate Reply';
+      }
+    }
+
+    // Copy draft to clipboard
+    async function copyDraft() {
+      const text = draftOutput.textContent;
+      if (!text) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.classList.add('copied');
+        copyText.textContent = 'Copied to Clipboard!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyText.textContent = 'Copy to Clipboard';
+        }, 2500);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.classList.add('copied');
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyText.textContent = 'Copy to Clipboard';
+        }, 2500);
+      }
+    }
+  </script>
+</body>
+</html>
