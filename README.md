@@ -181,19 +181,19 @@ AI-Masterclass-II/
 │       ├── requirements.txt        # Python package dependencies
 │       └── README.md               # Tool overview & Kenyan SME client pricing strategy
 ├── Week5/
-    ├── day-21/
-    │   ├── file-automation/        # Safe file automation CLI
-    │   └── law-firm-sorter/        # Extension-based legal document sorter
-    ├── day-22/
-    │   ├── job-market-tracker/     # Competitor job market & skills tracking pipeline
-    │   └── web-scraper/            # Books to Scrape web scraper and CSV exporter
-    ├── day-23/
-    │   ├── email-automation/       # SMTP email and scheduled report examples
-    │   └── retail-sales-reporter/  # Daily sales metrics and low-stock email report
-    ├── day-24/
-    │   └── automation-tool/        # Scheduled retail reporter and audit logging
-    └── day-25/
-        └── invoice-reminder/       # Automated invoice reminder and outbox drafter
+│   ├── day-21/
+│   │   ├── file-automation/        # Safe file automation CLI
+│   │   └── law-firm-sorter/        # Extension-based legal document sorter
+│   ├── day-22/
+│   │   ├── job-market-tracker/     # Competitor job market & skills tracking pipeline
+│   │   └── web-scraper/            # Books to Scrape web scraper and CSV exporter
+│   ├── day-23/
+│   │   ├── email-automation/       # SMTP email and scheduled report examples
+│   │   └── retail-sales-reporter/  # Daily sales metrics and low-stock email report
+│   ├── day-24/
+│   │   └── automation-tool/        # Scheduled retail reporter and audit logging
+│   └── day-25/
+│       └── invoice-reminder/       # Automated invoice reminder and outbox drafter
 └── Week6/
     └── day-26/
         ├── document-handler/       # PDF processing and Word report examples
