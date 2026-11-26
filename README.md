@@ -148,8 +148,11 @@ synthesizes findings, and produces a professional Markdown brief. It includes
 CLI options for audience, tone, model selection, and saving output.
 
 The [Day 28: Productizing My AI Application](./Week6/day-28/README.md) packages
-a WhatsApp complaint-reply drafter as a Flask web app, with Gemini-generated
-replies, a built-in fallback, and Render deployment configuration.
+a WhatsApp complaint-reply drafter as a configurable Flask web app. Businesses
+can customize branding and contact details without editing code; replies use
+Gemini when configured and fall back to a built-in offline engine. The project
+includes a Windows launcher, configuration validation, sample complaints, and
+Render deployment configuration.
 
 ## Repository structure
 
@@ -212,9 +215,14 @@ AI-Masterclass-II/
     │   └── workflow/               # Gemini research-to-brief CLI
     └── day-28/                     # Productizing My AI Application
         ├── app.py                  # Flask complaint reply web application
+        ├── config.py               # Client configuration loading and validation
+        ├── config.env.example      # Business settings template
+        ├── samples.json            # Example customer complaints
+        ├── run.bat                 # Windows setup and launch helper
         ├── templates/index.html    # Complaint entry and reply interface
         ├── test_app.py             # Application and fallback tests
         ├── render.yaml             # Render deployment configuration
+        ├── requirements.txt        # Python dependencies
         └── README.md               # Setup and product overview
 ```
 
