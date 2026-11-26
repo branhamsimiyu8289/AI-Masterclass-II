@@ -18,10 +18,13 @@ Tests the Nairobi Customer Complaint Reply Drafter:
     ✓ No over-promising
 """
 
+import os
+import tempfile
 import unittest
 from unittest.mock import MagicMock, Mock, patch
 
 from app import app, call_gemini_api, generate_fallback_reply
+from config import AppConfig, ConfigError, load_and_validate_config
 
 
 class NairobiComplaintReplyTestCase(unittest.TestCase):
@@ -201,6 +204,95 @@ class NairobiComplaintReplyTestCase(unittest.TestCase):
         self.assertNotIn("ugali", reply_lower)
         # 3. Actionable next step
         self.assertTrue(any(w in reply_lower for w in ["exchange", "dispatch", "rider", "deliver", "stock", "confirm", "send"]))
+
+    def test_08_input_validation_edge_cases(self):
+        """Verify malformed JSON, wrong types, short inputs, and oversized inputs return friendly 400 messages."""
+        # Non-dict JSON body
+        resp_list = self.client.post("/api/generate-reply", json=["not", "an", "object"])
+        self.assertEqual(resp_list.status_code, 400)
+        self.assertIn("message", resp_list.get_json())
+
+        # Non-string complaint
+        resp_int = self.client.post("/api/generate-reply", json={"complaint": 12345})
+        self.assertEqual(resp_int.status_code, 400)
+        self.assertIn("plain text", resp_int.get_json()["message"])
+
+        # Too short
+        resp_short = self.client.post("/api/generate-reply", json={"complaint": "hi"})
+        self.assertEqual(resp_short.status_code, 400)
+        self.assertIn("at least", resp_short.get_json()["message"])
+
+        # Too long
+        resp_long = self.client.post("/api/generate-reply", json={"complaint": "a" * 3500})
+        self.assertEqual(resp_long.status_code, 400)
+        self.assertIn("exceeds", resp_long.get_json()["message"])
+
+    def test_09_config_driven_branding_and_fallback(self):
+        """Verify fallback replies and rendered HTML use configured business details, not hardcoded names."""
+        custom_cfg = AppConfig(
+            business_name="Zuri Couriers Ltd",
+            manager_name="Amina Ochieng",
+            support_email="help@zuricouriers.co.ke",
+            support_phone="+254 711 222 333",
+        )
+        reply = generate_fallback_reply("Your rider delayed my parcel.", custom_cfg)
+        self.assertIn("Zuri Couriers Ltd", reply)
+        self.assertIn("Amina Ochieng", reply)
+        self.assertIn("help@zuricouriers.co.ke", reply)
+        self.assertNotIn("[Your Business Name]", reply)
+
+        html = self.client.get("/").get_data(as_text=True)
+        self.assertNotIn("Branham Simiyu", html)
+        self.assertIn("Savannah Customer Care", html)
+
+    def test_10_config_validation_clear_errors(self):
+        """Verify bad config.env values raise ConfigError with plain-English instructions."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            cfg_path = os.path.join(tmpdir, "config.env")
+
+            with open(cfg_path, "w", encoding="utf-8") as f:
+                f.write("SUPPORT_EMAIL=not-an-email\n")
+            with patch.dict(os.environ, {}, clear=True):
+                with self.assertRaises(ConfigError) as ctx:
+                    load_and_validate_config(tmpdir)
+                self.assertIn("SUPPORT_EMAIL", str(ctx.exception))
+                self.assertIn("config.env", str(ctx.exception))
+
+            with open(cfg_path, "w", encoding="utf-8") as f:
+                f.write("PORT=abc\n")
+            with patch.dict(os.environ, {}, clear=True):
+                with self.assertRaises(ConfigError) as ctx:
+                    load_and_validate_config(tmpdir)
+                self.assertIn("PORT", str(ctx.exception))
+                self.assertIn("whole number", str(ctx.exception))
+
+            with open(cfg_path, "w", encoding="utf-8") as f:
+                f.write("SAMPLES_FILE=missing_samples.json\n")
+            with patch.dict(os.environ, {}, clear=True):
+                with self.assertRaises(ConfigError) as ctx:
+                    load_and_validate_config(tmpdir)
+                self.assertIn("SAMPLES_FILE", str(ctx.exception))
+                self.assertIn("Could not find", str(ctx.exception))
+
+    def test_11_gemini_rejected_key_returns_friendly_notice_and_fallback(self):
+        """Verify rejected API keys never expose tracebacks and provide a clear notice."""
+        bad_resp = Mock()
+        bad_resp.status_code = 403
+        client = MagicMock()
+        client.__enter__.return_value = client
+        client.post.return_value = bad_resp
+
+        with patch("app.httpx.Client", return_value=client):
+            resp = self.client.post(
+                "/api/generate-reply",
+                json={"complaint": "My package has not arrived yet.", "api_key": "bad-key"},
+            )
+
+        self.assertEqual(resp.status_code, 200)
+        data = resp.get_json()
+        self.assertTrue(data["success"])
+        self.assertIn("GEMINI_API_KEY", data.get("notice", ""))
+        self.assertIn("config.env", data.get("notice", ""))
 
 
 if __name__ == "__main__":

@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Customer Complaint Reply Drafter</title>
+  <title>{{ ui.business_name }} — {{ ui.app_title }}</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --primary: #059669;
+      --primary: {{ ui.brand_primary_color }};
       --primary-dark: #047857;
       --primary-light: #ecfdf5;
-      --accent: #25D366; /* WhatsApp Green */
+      --accent: {{ ui.brand_accent_color }};
       --accent-dark: #128C7E;
       --surface: #ffffff;
       --bg: #f8fafc;
@@ -52,6 +52,18 @@
     header {
       text-align: center;
       margin-bottom: 2rem;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid #a7f3d0;
+      border-radius: 999px;
+      padding: 0.25rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
     }
 
     h1 {
@@ -103,6 +115,11 @@
       font-weight: 400;
     }
 
+    .char-count.over-limit {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
     textarea.complaint-box {
       width: 100%;
       min-height: 160px;
@@ -134,7 +151,7 @@
       justify-content: center;
       align-items: center;
       gap: 0.5rem;
-      background: linear-gradient(135deg, #059669 0%, #047857 100%);
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
       color: #ffffff;
       border: none;
       border-radius: var(--radius-md);
@@ -148,7 +165,7 @@
     }
 
     .btn-generate:hover:not(:disabled) {
-      background: linear-gradient(135deg, #047857 0%, #065f46 100%);
+      filter: brightness(0.95);
       transform: translateY(-1px);
       box-shadow: 0 6px 14px rgba(5, 150, 105, 0.3);
     }
@@ -181,6 +198,19 @@
       color: #991b1b;
       padding: 0.85rem 1rem;
       font-size: 0.9rem;
+      margin-top: 1rem;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notice-banner {
+      display: none;
+      background-color: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-md);
+      color: #92400e;
+      padding: 0.75rem 1rem;
+      font-size: 0.86rem;
       margin-top: 1rem;
       align-items: center;
       gap: 0.5rem;
@@ -325,6 +355,11 @@
       font-size: 0.85rem;
     }
 
+    .footer-contact {
+      margin-top: 0.35rem;
+      font-size: 0.8rem;
+    }
+
     @media (max-width: 640px) {
       .container {
         padding: 1.5rem 1rem;
@@ -345,25 +380,26 @@
 
   <div class="container">
     <header>
-      <h1>Customer Complaint <span>Reply Drafter</span></h1>
+      {% if ui.business_name %}
+      <div class="brand-badge">{{ ui.business_name }}</div>
+      {% endif %}
+      <h1>{{ ui.app_title }}</h1>
       <p class="subtitle">
-        Paste a customer complaint message below to instantly generate a polite, professional reply draft.
+        {{ ui.app_subtitle }}
       </p>
     </header>
 
     <div class="app-card">
-      <!-- Core Form: Exactly one text box, one button -->
-      <form id="replyForm" onsubmit="handleGenerate(event)">
+      <form id="replyForm" onsubmit="handleGenerate(event)" novalidate>
         <div class="form-group">
           <div class="form-label">
             <label for="complaintInput">Paste Customer Complaint Message</label>
-            <span class="char-count" id="charCount">0 characters</span>
+            <span class="char-count" id="charCount">0 / {{ ui.max_complaint_chars }} characters</span>
           </div>
           <textarea
             id="complaintInput"
             class="complaint-box"
-            placeholder="Paste the customer's WhatsApp complaint message here..."
-            required></textarea>
+            placeholder="Paste the customer's WhatsApp complaint message here..."></textarea>
         </div>
 
         <button type="submit" class="btn-generate" id="generateBtn">
@@ -373,9 +409,15 @@
       </form>
 
       <!-- Error Alert -->
-      <div class="error-banner" id="errorBanner">
+      <div class="error-banner" id="errorBanner" role="alert">
         <span>⚠️</span>
-        <span id="errorMessage">An error occurred while generating the reply.</span>
+        <span id="errorMessage">Please check your message and try again.</span>
+      </div>
+
+      <!-- Notice Alert (e.g. offline backup mode) -->
+      <div class="notice-banner" id="noticeBanner" role="status">
+        <span>ℹ️</span>
+        <span id="noticeMessage"></span>
       </div>
 
       <!-- Result Section (Returned on the same page) -->
@@ -412,12 +454,19 @@
     </div>
   </div>
 
-  <!-- Footer with copyright only -->
   <footer>
-    <p>&copy; 2026 Branham Simiyu. All rights reserved.</p>
+    <p>&copy; {{ ui.copyright_year }} {{ ui.copyright_owner }}. All rights reserved.</p>
+    {% if ui.support_email or ui.support_phone %}
+    <p class="footer-contact">
+      {% if ui.support_email %}Support: {{ ui.support_email }}{% endif %}
+      {% if ui.support_email and ui.support_phone %} &middot; {% endif %}
+      {% if ui.support_phone %}{{ ui.support_phone }}{% endif %}
+    </p>
+    {% endif %}
   </footer>
 
   <script>
+    const MAX_COMPLAINT_CHARS = {{ ui.max_complaint_chars | int }};
     const textarea = document.getElementById('complaintInput');
     const charCount = document.getElementById('charCount');
     const generateBtn = document.getElementById('generateBtn');
@@ -425,27 +474,50 @@
     const spinner = document.getElementById('spinner');
     const errorBanner = document.getElementById('errorBanner');
     const errorMessage = document.getElementById('errorMessage');
+    const noticeBanner = document.getElementById('noticeBanner');
+    const noticeMessage = document.getElementById('noticeMessage');
     const resultSection = document.getElementById('resultSection');
     const draftOutput = document.getElementById('draftOutput');
     const copyBtn = document.getElementById('copyBtn');
     const copyText = document.getElementById('copyText');
     const whatsappLink = document.getElementById('whatsappLink');
 
-    // Live character counter
+    // Live character counter with visual limit warning
     textarea.addEventListener('input', () => {
-      charCount.textContent = `${textarea.value.length} characters`;
+      const len = textarea.value.length;
+      charCount.textContent = `${len} / ${MAX_COMPLAINT_CHARS} characters`;
+      charCount.classList.toggle('over-limit', len > MAX_COMPLAINT_CHARS);
     });
 
-    // Form Submission: Calls backend API using the server's Gemini API key
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorBanner.style.display = 'flex';
+    }
+
+    // Form Submission: Validates input and calls backend API
     async function handleGenerate(e) {
       e.preventDefault();
+      errorBanner.style.display = 'none';
+      noticeBanner.style.display = 'none';
+
       const text = textarea.value.trim();
-      if (!text) return;
+      if (!text) {
+        showError('Please paste or type a customer complaint before clicking Generate Reply.');
+        textarea.focus();
+        return;
+      }
+
+      if (text.length > MAX_COMPLAINT_CHARS) {
+        showError(
+          `Your message is ${text.length.toLocaleString()} characters long, which is over the ${MAX_COMPLAINT_CHARS.toLocaleString()}-character limit. Please shorten it and try again.`
+        );
+        textarea.focus();
+        return;
+      }
 
       generateBtn.disabled = true;
       spinner.style.display = 'inline-block';
       btnText.textContent = 'Generating Reply...';
-      errorBanner.style.display = 'none';
 
       try {
         const response = await fetch('/api/generate-reply', {
@@ -456,16 +528,24 @@
           body: JSON.stringify({ complaint: text })
         });
 
-        const data = await response.json();
-
-        if (!response.ok || !data.success) {
-          throw new Error(data.message || 'Failed to generate reply');
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (parseErr) {
+          throw new Error('The tool returned an unexpected response. Please refresh the page and try again.');
         }
 
-        // Display results on the same page
+        if (!response.ok || !data.success) {
+          throw new Error((data && data.message) || 'Could not generate a reply. Please try again.');
+        }
+
+        if (data.notice) {
+          noticeMessage.textContent = data.notice;
+          noticeBanner.style.display = 'flex';
+        }
+
         draftOutput.textContent = data.reply;
-        
-        // Update WhatsApp web link
+
         const encoded = encodeURIComponent(data.reply);
         whatsappLink.href = `https://wa.me/?text=${encoded}`;
 
@@ -475,8 +555,11 @@
         copyBtn.classList.remove('copied');
         copyText.textContent = 'Copy to Clipboard';
       } catch (err) {
-        errorMessage.textContent = err.message || 'Network error. Please try again.';
-        errorBanner.style.display = 'flex';
+        if (err instanceof TypeError) {
+          showError('Could not reach the tool server. Make sure the run.bat window is still open and try again.');
+        } else {
+          showError(err.message || 'Something went wrong. Please try again.');
+        }
       } finally {
         generateBtn.disabled = false;
         spinner.style.display = 'none';
