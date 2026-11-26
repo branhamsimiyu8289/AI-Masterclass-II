@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ ui.business_name }} — {{ ui.app_title }}</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: {{ ui.brand_primary_color }};
+      --primary-dark: #047857;
+      --primary-light: #ecfdf5;
+      --accent: {{ ui.brand_accent_color }};
+      --accent-dark: #128C7E;
+      --surface: #ffffff;
+      --bg: #f8fafc;
+      --card-border: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.05);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+      flex: 1;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .brand-badge {
+      display: inline-block;
+      background-color: var(--primary-light);
+      color: var(--primary);
+      border: 1px solid #a7f3d0;
+      border-radius: 999px;
+      padding: 0.25rem 0.85rem;
+      font-size: 0.82rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+    }
+
+    h1 {
+      font-size: 2.15rem;
+      font-weight: 800;
+      color: #0f172a;
+      letter-spacing: -0.03em;
+      line-height: 1.25;
+      margin-bottom: 0.5rem;
+    }
+
+    h1 span {
+      color: var(--primary);
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto;
+    }
+
+    .app-card {
+      background-color: var(--surface);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius-lg);
+      padding: 1.75rem;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #1e293b;
+      margin-bottom: 0.5rem;
+    }
+
+    .char-count {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      font-weight: 400;
+    }
+
+    .char-count.over-limit {
+      color: #b91c1c;
+      font-weight: 600;
+    }
+
+    textarea.complaint-box {
+      width: 100%;
+      min-height: 160px;
+      padding: 1rem;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text-main);
+      background-color: #ffffff;
+      border: 1.5px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      resize: vertical;
+      line-height: 1.5;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+
+    textarea.complaint-box:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(5, 150, 105, 0.15);
+    }
+
+    textarea.complaint-box::placeholder {
+      color: #94a3b8;
+    }
+
+    .btn-generate {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #ffffff;
+      border: none;
+      border-radius: var(--radius-md);
+      padding: 0.95rem 1.5rem;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.2s ease;
+      box-shadow: 0 4px 10px rgba(5, 150, 105, 0.25);
+    }
+
+    .btn-generate:hover:not(:disabled) {
+      filter: brightness(0.95);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 14px rgba(5, 150, 105, 0.3);
+    }
+
+    .btn-generate:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .spinner {
+      display: none;
+      width: 18px;
+      height: 18px;
+      border: 2.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 50%;
+      border-top-color: #ffffff;
+      animation: spin 0.75s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .error-banner {
+      display: none;
+      background-color: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--radius-md);
+      color: #991b1b;
+      padding: 0.85rem 1rem;
+      font-size: 0.9rem;
+      margin-top: 1rem;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .notice-banner {
+      display: none;
+      background-color: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-md);
+      color: #92400e;
+      padding: 0.75rem 1rem;
+      font-size: 0.86rem;
+      margin-top: 1rem;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .result-section {
+      display: none;
+      margin-top: 2rem;
+      animation: fadeIn 0.3s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .result-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.75rem;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .result-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #0f172a;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .whatsapp-preview-card {
+      background-color: #efeae2;
+      background-image: radial-gradient(#d6d0c4 1px, transparent 1px);
+      background-size: 16px 16px;
+      border: 1px solid #cbd5e1;
+      border-radius: var(--radius-md);
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .whatsapp-bubble {
+      background-color: #ffffff;
+      border-radius: 8px;
+      border-top-left-radius: 0;
+      padding: 1rem 1.15rem;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+      max-width: 100%;
+      position: relative;
+    }
+
+    .whatsapp-bubble::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -8px;
+      width: 0;
+      height: 0;
+      border-top: 0 solid transparent;
+      border-right: 8px solid #ffffff;
+      border-bottom: 8px solid transparent;
+    }
+
+    .bubble-text {
+      white-space: pre-wrap;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #111827;
+      word-break: break-word;
+    }
+
+    .bubble-meta {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      gap: 0.3rem;
+      margin-top: 0.5rem;
+      font-size: 0.72rem;
+      color: #64748b;
+    }
+
+    .draft-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1rem;
+    }
+
+    .btn-action {
+      flex: 1;
+      min-width: 170px;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.45rem;
+      padding: 0.75rem 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      font-family: inherit;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      text-decoration: none;
+    }
+
+    .btn-copy {
+      background-color: #ffffff;
+      color: #1e293b;
+      border: 1.5px solid #cbd5e1;
+    }
+
+    .btn-copy:hover {
+      background-color: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    .btn-copy.copied {
+      background-color: var(--primary-light);
+      border-color: var(--primary);
+      color: var(--primary-dark);
+    }
+
+    .btn-whatsapp {
+      background-color: var(--accent);
+      color: #ffffff;
+      border: 1.5px solid var(--accent-dark);
+    }
+
+    .btn-whatsapp:hover {
+      background-color: var(--accent-dark);
+    }
+
+    footer {
+      text-align: center;
+      padding: 1.5rem 1rem;
+      border-top: 1px solid var(--card-border);
+      background-color: #ffffff;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    .footer-contact {
+      margin-top: 0.35rem;
+      font-size: 0.8rem;
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        padding: 1.5rem 1rem;
+      }
+      h1 {
+        font-size: 1.65rem;
+      }
+      .app-card {
+        padding: 1.25rem;
+      }
+      .btn-action {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <header>
+      {% if ui.business_name %}
+      <div class="brand-badge">{{ ui.business_name }}</div>
+      {% endif %}
+      <h1>{{ ui.app_title }}</h1>
+      <p class="subtitle">
+        {{ ui.app_subtitle }}
+      </p>
+    </header>
+
+    <div class="app-card">
+      <form id="replyForm" onsubmit="handleGenerate(event)" novalidate>
+        <div class="form-group">
+          <div class="form-label">
+            <label for="complaintInput">Paste Customer Complaint Message</label>
+            <span class="char-count" id="charCount">0 / {{ ui.max_complaint_chars }} characters</span>
+          </div>
+          <textarea
+            id="complaintInput"
+            class="complaint-box"
+            placeholder="Paste the customer's WhatsApp complaint message here..."></textarea>
+        </div>
+
+        <button type="submit" class="btn-generate" id="generateBtn">
+          <span class="spinner" id="spinner"></span>
+          <span id="btnText">Generate Reply</span>
+        </button>
+      </form>
+
+      <!-- Error Alert -->
+      <div class="error-banner" id="errorBanner" role="alert">
+        <span>⚠️</span>
+        <span id="errorMessage">Please check your message and try again.</span>
+      </div>
+
+      <!-- Notice Alert (e.g. offline backup mode) -->
+      <div class="notice-banner" id="noticeBanner" role="status">
+        <span>ℹ️</span>
+        <span id="noticeMessage"></span>
+      </div>
+
+      <!-- Result Section (Returned on the same page) -->
+      <div class="result-section" id="resultSection">
+        <div class="result-header">
+          <div class="result-title">
+            <span>📱 Draft Response</span>
+          </div>
+        </div>
+
+        <!-- WhatsApp Preview Card -->
+        <div class="whatsapp-preview-card">
+          <div class="whatsapp-bubble">
+            <div class="bubble-text" id="draftOutput"></div>
+            <div class="bubble-meta">
+              <span id="bubbleTime">Just now</span>
+              <span style="color: #38bdf8; font-weight: bold;">✓✓</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="draft-actions">
+          <button type="button" class="btn-action btn-copy" id="copyBtn" onclick="copyDraft()">
+            <span id="copyIcon">📋</span>
+            <span id="copyText">Copy to Clipboard</span>
+          </button>
+          <a href="#" class="btn-action btn-whatsapp" id="whatsappLink" target="_blank" rel="noopener">
+            <span>💬</span>
+            <span>Send via WhatsApp Web</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <p>&copy; {{ ui.copyright_year }} {{ ui.copyright_owner }}. All rights reserved.</p>
+    {% if ui.support_email or ui.support_phone %}
+    <p class="footer-contact">
+      {% if ui.support_email %}Support: {{ ui.support_email }}{% endif %}
+      {% if ui.support_email and ui.support_phone %} &middot; {% endif %}
+      {% if ui.support_phone %}{{ ui.support_phone }}{% endif %}
+    </p>
+    {% endif %}
+  </footer>
+
+  <script>
+    const MAX_COMPLAINT_CHARS = {{ ui.max_complaint_chars | int }};
+    const textarea = document.getElementById('complaintInput');
+    const charCount = document.getElementById('charCount');
+    const generateBtn = document.getElementById('generateBtn');
+    const btnText = document.getElementById('btnText');
+    const spinner = document.getElementById('spinner');
+    const errorBanner = document.getElementById('errorBanner');
+    const errorMessage = document.getElementById('errorMessage');
+    const noticeBanner = document.getElementById('noticeBanner');
+    const noticeMessage = document.getElementById('noticeMessage');
+    const resultSection = document.getElementById('resultSection');
+    const draftOutput = document.getElementById('draftOutput');
+    const copyBtn = document.getElementById('copyBtn');
+    const copyText = document.getElementById('copyText');
+    const whatsappLink = document.getElementById('whatsappLink');
+
+    // Live character counter with visual limit warning
+    textarea.addEventListener('input', () => {
+      const len = textarea.value.length;
+      charCount.textContent = `${len} / ${MAX_COMPLAINT_CHARS} characters`;
+      charCount.classList.toggle('over-limit', len > MAX_COMPLAINT_CHARS);
+    });
+
+    function showError(msg) {
+      errorMessage.textContent = msg;
+      errorBanner.style.display = 'flex';
+    }
+
+    // Form Submission: Validates input and calls backend API
+    async function handleGenerate(e) {
+      e.preventDefault();
+      errorBanner.style.display = 'none';
+      noticeBanner.style.display = 'none';
+
+      const text = textarea.value.trim();
+      if (!text) {
+        showError('Please paste or type a customer complaint before clicking Generate Reply.');
+        textarea.focus();
+        return;
+      }
+
+      if (text.length > MAX_COMPLAINT_CHARS) {
+        showError(
+          `Your message is ${text.length.toLocaleString()} characters long, which is over the ${MAX_COMPLAINT_CHARS.toLocaleString()}-character limit. Please shorten it and try again.`
+        );
+        textarea.focus();
+        return;
+      }
+
+      generateBtn.disabled = true;
+      spinner.style.display = 'inline-block';
+      btnText.textContent = 'Generating Reply...';
+
+      try {
+        const response = await fetch('/api/generate-reply', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ complaint: text })
+        });
+
+        let data = null;
+        try {
+          data = await response.json();
+        } catch (parseErr) {
+          throw new Error('The tool returned an unexpected response. Please refresh the page and try again.');
+        }
+
+        if (!response.ok || !data.success) {
+          throw new Error((data && data.message) || 'Could not generate a reply. Please try again.');
+        }
+
+        if (data.notice) {
+          noticeMessage.textContent = data.notice;
+          noticeBanner.style.display = 'flex';
+        }
+
+        draftOutput.textContent = data.reply;
+
+        const encoded = encodeURIComponent(data.reply);
+        whatsappLink.href = `https://wa.me/?text=${encoded}`;
+
+        resultSection.style.display = 'block';
+        resultSection.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+        copyBtn.classList.remove('copied');
+        copyText.textContent = 'Copy to Clipboard';
+      } catch (err) {
+        if (err instanceof TypeError) {
+          showError('Could not reach the tool server. Make sure the run.bat window is still open and try again.');
+        } else {
+          showError(err.message || 'Something went wrong. Please try again.');
+        }
+      } finally {
+        generateBtn.disabled = false;
+        spinner.style.display = 'none';
+        btnText.textContent = 'Generate Reply';
+      }
+    }
+
+    // Copy draft to clipboard
+    async function copyDraft() {
+      const text = draftOutput.textContent;
+      if (!text) return;
+
+      try {
+        await navigator.clipboard.writeText(text);
+        copyBtn.classList.add('copied');
+        copyText.textContent = 'Copied to Clipboard!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyText.textContent = 'Copy to Clipboard';
+        }, 2500);
+      } catch (err) {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        copyBtn.classList.add('copied');
+        copyText.textContent = 'Copied!';
+        setTimeout(() => {
+          copyBtn.classList.remove('copied');
+          copyText.textContent = 'Copy to Clipboard';
+        }, 2500);
+      }
+    }
+  </script>
+</body>
+</html>
