@@ -205,10 +205,6 @@ AI-Masterclass-II/
     │   └── pdf-Q&A/                # Gemini-powered PDF question-answering CLI
     └── day-27/
         └── workflow/               # Gemini research-to-brief CLI
-            ├── workflow.py
-            ├── test_workflow.py
-            ├── requirements.txt
-            └── README.md
 ```
 
 ## Getting started
