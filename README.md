@@ -141,6 +141,11 @@ and indexes invoice PDFs. The separate [PDF Q&A assistant](./Week6/day-26/pdf-Q&
 answers questions about a PDF using Gemini, with page citations and support for
 scanned documents.
 
+The [day-27 research workflow](./Week6/day-27/workflow/README.md) plans topic
+research, gathers Wikipedia references and optional Gemini Search grounding,
+synthesizes findings, and produces a professional Markdown brief. It includes
+CLI options for audience, tone, model selection, and saving output.
+
 ## Repository structure
 
 ```text
@@ -195,9 +200,15 @@ AI-Masterclass-II/
 │   └── day-25/
 │       └── invoice-reminder/       # Automated invoice reminder and outbox drafter
 └── Week6/
-    └── day-26/
-        ├── document-handler/       # PDF processing and Word report examples
-        └── pdf-Q&A/                # Gemini-powered PDF question-answering CLI
+    ├── day-26/
+    │   ├── document-handler/       # PDF processing and Word report examples
+    │   └── pdf-Q&A/                # Gemini-powered PDF question-answering CLI
+    └── day-27/
+        └── workflow/               # Gemini research-to-brief CLI
+            ├── workflow.py
+            ├── test_workflow.py
+            ├── requirements.txt
+            └── README.md
 ```
 
 ## Getting started
