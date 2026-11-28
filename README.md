@@ -154,6 +154,12 @@ Gemini when configured and fall back to a built-in offline engine. The project
 includes a Windows launcher, configuration validation, sample complaints, and
 Render deployment configuration.
 
+The [Day 29: Testing And Readability](./Week6/day-29/README.md) project builds
+a configurable document-handling application with readable, testable Python code.
+It validates configuration, processes and analyzes documents, and includes a
+focused test suite that covers environment loading, validation, document
+processing, AI output generation, and Word report creation.
+
 ## Repository structure
 
 ```text
@@ -213,17 +219,23 @@ AI-Masterclass-II/
     │   └── pdf-Q&A/                # Gemini-powered PDF question-answering CLI
     ├── day-27/                     # Multi-Step AI Workflow
     │   └── workflow/               # Gemini research-to-brief CLI
-    └── day-28/                     # Productizing My AI Application
-        ├── app.py                  # Flask complaint reply web application
-        ├── config.py               # Client configuration loading and validation
-        ├── config.env.example      # Business settings template
-        ├── samples.json            # Example customer complaints
-        ├── run.bat                 # Windows setup and launch helper
-        ├── templates/index.html    # Complaint entry and reply interface
-        ├── test_app.py             # Application and fallback tests
-        ├── render.yaml             # Render deployment configuration
+    ├── day-28/                     # Productizing My AI Application
+    │   ├── app.py                  # Flask complaint reply web application
+    │   ├── config.py               # Client configuration loading and validation
+    │   ├── config.env.example      # Business settings template
+    │   ├── samples.json            # Example customer complaints
+    │   ├── run.bat                 # Windows setup and launch helper
+    │   ├── templates/index.html    # Complaint entry and reply interface
+    │   ├── test_app.py             # Application and fallback tests
+    │   ├── render.yaml             # Render deployment configuration
+    │   ├── requirements.txt        # Python dependencies
+    │   └── README.md               # Setup and product overview
+    └── day-29/                     # Testing And Readability
+        ├── document_handler.py     # Configurable document processing and reporting
+        ├── test_document_handler.py # Environment, validation, AI, and report tests
+        ├── .env.example            # Document handler settings template
         ├── requirements.txt        # Python dependencies
-        └── README.md               # Setup and product overview
+        └── README.md               # Setup, testing, and usage overview
 ```
 
 ## Getting started
